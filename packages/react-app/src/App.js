@@ -4,8 +4,9 @@ import { shortenAddress, useCall, useEthers, useLookupAddress } from "@usedapp/c
 import React, { useEffect, useState } from "react";
 
 import { Body, Button, Container, Header, Image, Link } from "./components";
-import logo from "./ethereumLogo.png";
 
+
+import Dashboard from "./components/Dashboard";
 import { MAINNET_ID, addresses, abis } from "@uniswap-v2-app/contracts";
 import GET_AGGREGATED_UNISWAP_DATA from "./graphql/subgraph";
 
@@ -51,9 +52,9 @@ function App() {
   // Read more about useDapp on https://usedapp.io/
   const { error: contractCallError, value: reserves } =
     useCall({
-       contract: new Contract(addresses[MAINNET_ID].pairs["DAI-WETH"], abis.pair),
-       method: "getReserves",
-       args: [],
+      contract: new Contract(addresses[MAINNET_ID].pairs["DAI-WETH"], abis.pair),
+      method: "getReserves",
+      args: [],
     }) ?? {};
 
   const { loading, error: subgraphQueryError, data } = useQuery(GET_AGGREGATED_UNISWAP_DATA);
@@ -73,17 +74,7 @@ function App() {
       <Header>
         <WalletButton />
       </Header>
-      <Body>
-        <Image src={logo} alt="ethereum-logo" />
-        <p>
-          Edit <code>packages/react-app/src/App.js</code> and save to reload.
-        </p>
-        <Link href="https://reactjs.org">
-          Learn React
-        </Link>
-        <Link href="https://usedapp.io/">Learn useDapp</Link>
-        <Link href="https://uniswap.org/docs/v2/">Learn Uniswap v2</Link>
-      </Body>
+      <Dashboard />
     </Container>
   );
 }
