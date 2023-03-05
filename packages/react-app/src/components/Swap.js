@@ -1,45 +1,8 @@
-import React, { useState } from 'react';
-import { ethers } from 'ethers';
-import { Token, Pair, Route, Trade, TradeType, TokenAmount } from '@pancakeswap-libs/sdk';
+import React from 'react';
 
-const Swap = ({ provider }) => {
-  const [inputAmount, setInputAmount] = useState('');
-  const [outputAmount, setOutputAmount] = useState('');
-
-  const handleInputAmountChange = (event) => {
-    setInputAmount(event.target.value);
-  };
-
-  const handleSwap = async () => {
-    const inputTokenAddress = inputToken;
-    const outputTokenAddress = outputToken;
-
-    const inputToken = new Token(1, inputTokenAddress, 18);
-    const outputToken = new Token(1, outputTokenAddress, 18);
-
-    const pair = await Pair.fetchData(inputToken, outputToken, provider);
-
-    const route = new Route([pair], inputToken);
-
-    const trade = new Trade(route, new TokenAmount(inputToken, ethers.utils.parseUnits(inputAmount, 18)), TradeType.EXACT_INPUT);
-
-    setOutputAmount(ethers.utils.formatUnits(trade.outputAmount.toExact(), 18));
-  };
-
+const Swap = () => {
   return (
-    <div>
-      <label>
-        Input Amount:
-        <input value={inputAmount} onChange={handleInputAmountChange} />
-      </label>
-      <br />
-      <label>
-        Output Amount:
-        <input value={outputAmount} disabled />
-      </label>
-      <br />
-      <button onClick={handleSwap}>Swap</button>
-    </div>
+    <iframe width="400" height="690" frameborder="0" allow="clipboard-read *; clipboard-write *; web-share *; accelerometer *; autoplay *; camera *; gyroscope *; payment *; geolocation *" src="https://flooz.trade/embed/trade?swapDisabled=false&swapToTokenAddress=0xdc42c3a92c4A03F9b9F3FBaBa0125286FDAa6772&swapLockToToken=true&onRampDisabled=true&onRampAsDefault=false&onRampDefaultAmount=200&network=bsc&lightMode=true&primaryColor=%23bfc500&roundedCorners=0&padding=32" ></iframe>
   );
 };
 

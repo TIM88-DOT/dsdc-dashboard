@@ -5,6 +5,7 @@ import React, { useEffect, useState } from "react";
 
 import { Body, Button, Container, Header, Image, Link } from "./components";
 
+import logo from "./logo.png";
 
 import Dashboard from "./components/Dashboard";
 import { MAINNET_ID, addresses, abis } from "@uniswap-v2-app/contracts";
@@ -72,6 +73,10 @@ function App() {
   return (
     <Container>
       <Header>
+        <img style={{
+          width: "11em",
+          marginLeft: "15px"
+        }} src={logo} />
         <WalletButton />
       </Header>
       <Dashboard />

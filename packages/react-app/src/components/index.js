@@ -11,13 +11,14 @@ export const Body = styled.div`
 `;
 
 export const Button = styled.button`
-  background-color: white;
+  background-color: #bfc500;
   border: none;
   border-radius: 8px;
-  color: #282c34;
+  color: #fff;
   cursor: pointer;
   font-size: 16px;
   margin: 0px 20px;
+  font-weight: bold;
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
@@ -34,7 +35,7 @@ export const Header = styled.header`
   color: white;
   display: flex;
   flex-direction: row;
-  justify-content: flex-end;
+  justify-content: space-between;
   min-height: 70px;
 `;
 
