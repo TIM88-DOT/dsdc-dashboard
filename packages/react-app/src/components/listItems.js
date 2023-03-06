@@ -13,27 +13,47 @@ import PublicIcon from '@mui/icons-material/Public';
 import AgricultureIcon from '@mui/icons-material/Agriculture';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import TwitterIcon from '@mui/icons-material/Twitter';
+import { Link } from "react-router-dom";
 
+const linkStyle = {
+  margin: " 0",
+  fontFamily: "Montserrat, sans-serif",
+  fontWeight: "400",
+  fontSize: "1rem",
+  lineHeight: "1.5",
+  display: "block",
+  color: "#fff",
+  textDecoration: "none"
+}
 export const mainListItems = (
+
   <React.Fragment>
-    <ListItemButton>
-      <ListItemIcon>
-        <SwapVertIcon />
-      </ListItemIcon>
-      <ListItemText primary="Swap" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <RocketLaunchIcon />
-      </ListItemIcon>
-      <ListItemText primary="NFT Staking" />
-    </ListItemButton>
+
+    <Link style={linkStyle} to={`/`}>
+      <ListItemButton>
+        <ListItemIcon>
+          <SwapVertIcon />
+        </ListItemIcon>
+        Swap
+      </ListItemButton>
+    </Link>
+
+    <Link style={linkStyle} to={`stake`}>
+      <ListItemButton>
+        <ListItemIcon>
+          <RocketLaunchIcon />
+        </ListItemIcon>
+        NFT Staking
+      </ListItemButton>
+    </Link>
+
     <ListItemButton>
       <ListItemIcon>
         <MonetizationOnIcon />
       </ListItemIcon>
       <ListItemText primary="Token Staking" />
     </ListItemButton>
+
     <ListItemButton>
       <ListItemIcon>
         <AgricultureIcon />

@@ -22,12 +22,13 @@ import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
 import Swap from './Swap';
-import { amber, grey } from '@mui/material/colors';
+import { grey } from '@mui/material/colors';
+import { Route, Routes } from 'react-router-dom';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
       {'Copyright © '}
-      <Link color="inherit" href="https://mui.com/">
+      <Link color="inherit" href="https://drunkskunksdc.com/">
         Drunk Skunks Drinking Club
       </Link>{' '}
       {new Date().getFullYear()}
@@ -125,18 +126,13 @@ function DashboardContent() {
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
-
             <Grid container
               justifyContent="center"
               alignItems="center" item xs={12}>
-              <Paper sx={{
-                p: 1,
-                display: 'flex',
-                flexDirection: 'column',
-                height: 600,
-              }}>
-                <Swap />
-              </Paper>
+              <Routes>
+                <Route path="/" element={<Swap />} />
+                <Route path="stake" element={<div>Henlo !! </div>} />
+              </Routes>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
