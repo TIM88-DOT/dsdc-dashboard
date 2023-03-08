@@ -24,6 +24,7 @@ import Orders from './Orders';
 import Swap from './Swap';
 import { grey } from '@mui/material/colors';
 import { Route, Routes } from 'react-router-dom';
+import NftStaking from './NftStaking/NftStaking';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -125,16 +126,16 @@ function DashboardContent() {
           }}
         >
           <Toolbar />
-          <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          <Container maxWidth="lg" sx={{ mt: 1, mb: 4 }}>
             <Grid container
               justifyContent="center"
               alignItems="center" item xs={12}>
               <Routes>
                 <Route path="/" element={<Swap />} />
-                <Route path="stake" element={<div>Henlo !! </div>} />
+                <Route path="stake" element={<NftStaking />} />
               </Routes>
             </Grid>
-            <Copyright sx={{ pt: 4 }} />
+            <Copyright sx={{ position: "absolute", bottom: "-30px", left: "50%" }} />
           </Container>
         </Box>
       </Box>
