@@ -135,7 +135,7 @@ function DashboardContent() {
                 <Route path="stake" element={<NftStaking />} />
               </Routes>
             </Grid>
-            <Copyright sx={{ position: "absolute", bottom: "-30px", left: "50%" }} />
+            <Copyright sx={{ position: "sticky", bottom: "-50px", left: "50%" }} />
           </Container>
         </Box>
       </Box>

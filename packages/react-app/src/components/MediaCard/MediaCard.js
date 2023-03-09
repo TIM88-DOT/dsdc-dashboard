@@ -10,16 +10,24 @@ import mutantLogo from "../../assets/images/mutants-logo.png";
 
 export default function MediaCard(props) {
   const style = props.mutants ? {
-    maxWidth: 245,
-    marginLeft: 15
+    width: 300,
+    marginLeft: 15,
+    borderRadius: "18px"
   } :
     {
-      maxWidth: 245
+      width: 300,
+      borderRadius: "18px"
     };
+
+  const CardMediaStyle = props.mutants ? {
+    height: 190, backgroundSize: "55%"
+  } : {
+    height: 190, backgroundSize: "45%"
+  }
   return (
     <Card sx={style}>
       <CardMedia
-        sx={{ height: 140, backgroundSize: "contain" }}
+        sx={CardMediaStyle}
         image={props.mutants ? mutantLogo : logo}
         title={props.mutants ? "DSDC Mutants Staking" : "DSDC Staking"}
       />
@@ -27,10 +35,21 @@ export default function MediaCard(props) {
         <Typography gutterBottom variant="h5" component="div">
           {props.mutants ? "Mutants Staking" : "DSDC Staking"}
         </Typography>
-        <Typography variant="body2" color="text.secondary">
-          Lizards are a widespread group of squamate reptiles, with over 6,000
-          species, ranging across all continents except Antarctica
-        </Typography>
+        {props.mutants ? <>
+          <Typography variant="body2" color="text.secondary">
+            ◘ Higher APR
+          </Typography>
+          <Typography variant="body2" color="text.secondary">
+            ◘ 1 month lock
+          </Typography></> :
+          <>
+            <Typography variant="body2" color="text.secondary">
+              ◘ Lower APR
+            </Typography>
+            <Typography variant="body2" color="text.secondary">
+              ◘ Can unstake anytime
+            </Typography>
+          </>}
       </CardContent>
       <CardActions sx={{ justifyContent: "center" }}>
         <Button size="small">Select</Button>
