@@ -37,7 +37,7 @@ export default function MediaCard(props) {
         </Typography>
         {props.mutants ? <>
           <Typography variant="body2" color="text.secondary">
-            ◘ Higher APR
+            ◘ 10x Higher APR
           </Typography>
           <Typography variant="body2" color="text.secondary">
             ◘ 1 month lock
