@@ -7,11 +7,21 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import logo from "../../assets/images/logo.png";
 import mutantLogo from "../../assets/images/mutants-logo.png";
+import { Link } from "react-router-dom";
 import classes from "./MediaCard.module.css"
 
 export default function MediaCard(props) {
   const defaultClass = props.mutants ? "card--mutant" : "card"
-
+  const linkStyle = {
+    margin: " 0",
+    fontFamily: "Montserrat, sans-serif",
+    fontWeight: "400",
+    fontSize: "1rem",
+    lineHeight: "1.5",
+    display: "block",
+    color: "#fff",
+    textDecoration: "none"
+  }
   const CardMediaStyle = props.mutants ? {
     height: 190, backgroundSize: "55%"
   } : {
@@ -45,7 +55,9 @@ export default function MediaCard(props) {
           </>}
       </CardContent>
       <CardActions sx={{ justifyContent: "center", marginTop: "50px" }}>
-        <Button size="medium">Select</Button>
+        <Link style={linkStyle} to={`/tube`}>
+          <Button size="medium">Select</Button>
+        </Link>
       </CardActions>
     </Card>
   );

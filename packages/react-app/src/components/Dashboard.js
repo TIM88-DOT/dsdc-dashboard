@@ -182,6 +182,7 @@ function DashboardContent() {
               <Routes>
                 <Route path="/" element={<Swap />} />
                 <Route path="stake" element={<NftStaking />} />
+                <Route path="tube" element={<div>DDDD</div>} />
               </Routes>
             </Grid>
             <Copyright sx={{ position: "sticky", bottom: "-50px", left: "50%" }} />

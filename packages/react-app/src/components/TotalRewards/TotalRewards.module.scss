@@ -1,0 +1,67 @@
+.main {
+  width: 100%;
+  margin: 3% 5%;
+  display: flex;
+  font-family: "Inter", sans-serif;
+}
+
+.container {
+  background: #2d2c2e;
+  border-radius: 23px;
+  padding-bottom: 20px;
+  margin: auto auto auto 15px;
+}
+
+.prize-container {
+  background: #2d2c2e;
+  border-radius: 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 32%;
+  min-width: 250px;
+  margin-top: 20px;
+  p {
+    font-size: 18px;
+  }
+}
+
+.prize-container img {
+  width: 5em;
+}
+
+.prize-container h4 {
+  color: #ffffff;
+  text-align: center;
+}
+
+.claim-btn {
+  padding: 10px 30px;
+  margin-top: 20px;
+  background: linear-gradient(
+    358.62deg,
+    #de9f17 1.11%,
+    #cf9a15 30.61%,
+    #fff68a 63.67%,
+    #ffcf45 95.71%
+  );
+  border-radius: 25px;
+  font-weight: 600;
+  font-size: 1em;
+}
+.actions {
+  padding: 35px 0px;
+}
+@media screen and (max-width: 769px) {
+  .main {
+    flex-direction: column-reverse;
+    margin: 0;
+  }
+
+  .prize-container {
+    width: 75%;
+    margin: auto;
+    margin-block: 1em;
+  }
+}

@@ -1,0 +1,26 @@
+.container {
+  background: #2d2c2e;
+  border-radius: 23px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  margin: auto auto auto 15px;
+  min-height: 400px;
+  p {
+    font-size: 18px;
+  }
+}
+
+.actions {
+  display: flex;
+  padding: 25px;
+}
+.loading {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  flex-direction: column;
+  margin-top: 35px;
+  margin-bottom: 10px;
+}
