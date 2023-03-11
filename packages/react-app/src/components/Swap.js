@@ -3,6 +3,7 @@ import Paper from '@mui/material/Paper';
 const Swap = () => {
   return (
     <Paper sx={{
+      mt: 7,
       p: 1,
       display: 'flex',
       flexDirection: 'column',

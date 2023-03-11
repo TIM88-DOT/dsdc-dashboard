@@ -1,53 +1,14 @@
 import { useQuery } from "@apollo/client";
 import { Contract } from "@ethersproject/contracts";
-import { shortenAddress, useCall, useEthers, useLookupAddress } from "@usedapp/core";
-import React, { useEffect, useState } from "react";
+import { useCall } from "@usedapp/core";
+import React, { useEffect } from "react";
 
-import { Body, Button, Container, Header, Image, Link } from "./components";
-
-import logo from "./logo.png";
+import { Container} from "./components";
 
 import Dashboard from "./components/Dashboard";
 import { MAINNET_ID, addresses, abis } from "@uniswap-v2-app/contracts";
 import GET_AGGREGATED_UNISWAP_DATA from "./graphql/subgraph";
 
-function WalletButton() {
-  const [rendered, setRendered] = useState("");
-
-  const { ens } = useLookupAddress();
-  const { account, activateBrowserWallet, deactivate, error } = useEthers();
-
-  useEffect(() => {
-    if (ens) {
-      setRendered(ens);
-    } else if (account) {
-      setRendered(shortenAddress(account));
-    } else {
-      setRendered("");
-    }
-  }, [account, ens, setRendered]);
-
-  useEffect(() => {
-    if (error) {
-      console.error("Error while connecting wallet:", error.message);
-    }
-  }, [error]);
-
-  return (
-    <Button
-      onClick={() => {
-        if (!account) {
-          activateBrowserWallet();
-        } else {
-          deactivate();
-        }
-      }}
-    >
-      {rendered === "" && "Connect Wallet"}
-      {rendered !== "" && rendered}
-    </Button>
-  );
-}
 
 function App() {
   // Read more about useDapp on https://usedapp.io/
@@ -72,13 +33,6 @@ function App() {
 
   return (
     <Container>
-      <Header>
-        <img style={{
-          width: "11em",
-          marginLeft: "15px"
-        }} src={logo} />
-        <WalletButton />
-      </Header>
       <Dashboard />
     </Container>
   );

@@ -1,0 +1,18 @@
+.card {
+    width: 320px;
+    height: 400px;
+}
+
+.card--mutant {
+    height: 400px;
+    width: 320px;
+    border-radius: 10px;
+    margin-Left: 55px;
+}
+
+@media screen and (max-width: 750px) {
+    .card--mutant {
+        margin-Left: 0px;
+        margin-top: 30px;
+    }
+}

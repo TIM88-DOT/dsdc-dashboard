@@ -7,17 +7,10 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import logo from "../../assets/images/logo.png";
 import mutantLogo from "../../assets/images/mutants-logo.png";
+import classes from "./MediaCard.module.css"
 
 export default function MediaCard(props) {
-  const style = props.mutants ? {
-    width: 300,
-    marginLeft: 15,
-    borderRadius: "18px"
-  } :
-    {
-      width: 300,
-      borderRadius: "18px"
-    };
+  const defaultClass = props.mutants ? "card--mutant" : "card"
 
   const CardMediaStyle = props.mutants ? {
     height: 190, backgroundSize: "55%"
@@ -25,7 +18,7 @@ export default function MediaCard(props) {
     height: 190, backgroundSize: "45%"
   }
   return (
-    <Card sx={style}>
+    <Card className={classes[defaultClass]}>
       <CardMedia
         sx={CardMediaStyle}
         image={props.mutants ? mutantLogo : logo}
@@ -51,8 +44,8 @@ export default function MediaCard(props) {
             </Typography>
           </>}
       </CardContent>
-      <CardActions sx={{ justifyContent: "center" }}>
-        <Button size="small">Select</Button>
+      <CardActions sx={{ justifyContent: "center", marginTop: "50px" }}>
+        <Button size="medium">Select</Button>
       </CardActions>
     </Card>
   );
