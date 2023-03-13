@@ -12,6 +12,7 @@ import classes from "./MediaCard.module.css"
 
 export default function MediaCard(props) {
   const defaultClass = props.mutants ? "card--mutant" : "card"
+  const uri = props.mutants ? `dsdc-mutants` : `dsdc`
   const linkStyle = {
     margin: " 0",
     fontFamily: "Montserrat, sans-serif",
@@ -55,7 +56,7 @@ export default function MediaCard(props) {
           </>}
       </CardContent>
       <CardActions sx={{ justifyContent: "center", marginTop: "50px" }}>
-        <Link style={linkStyle} to={`/tube`}>
+        <Link style={linkStyle} to={uri}>
           <Button size="medium">Select</Button>
         </Link>
       </CardActions>

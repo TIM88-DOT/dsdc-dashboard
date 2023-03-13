@@ -1,17 +1,16 @@
 import classes from "./TotalRewards.module.scss";
-import { Button } from "../index";
+import { ButtonPrimary } from "../index";
 import Typography from "@mui/material/Typography";
 import { useCall, useEthers } from "@usedapp/core";
 import { Contract } from "@ethersproject/contracts";
 import { useState, useContext } from "react";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
-import { PlanContext } from "../../App";
 import { ethers } from "ethers";
 
-export default function TotalRewards() {
+export default function TotalRewards(props) {
   const { account, chainId, library } = useEthers();
   const [loading, setLoading] = useState(false);
-  const plan = useContext(PlanContext);
+  const plan = props.plan;
   const { error: totalRewardsError, value: totalRewardsValue } =
     useCall(
       account && {
@@ -44,10 +43,14 @@ export default function TotalRewards() {
   };
   return (
     <div className={classes["prize-container"]}>
-      <h4 style={{ padding: "0.7rem" }}>YOUR REWARDS</h4>
+      <h2 style={{ padding: "0.7rem" }}>YOUR REWARDS</h2>
       {account ? (
         <div>
-          <Typography sx={{ fontSize: "16px" }} variant="h6" component="h6">
+          <Typography
+            sx={{ textAlign: "center", fontSize: "16px" }}
+            variant="h6"
+            component="h6"
+          >
             TOTAL :
           </Typography>
 
@@ -56,8 +59,12 @@ export default function TotalRewards() {
               ethers.utils.formatEther(totalRewardsValue[0])}
           </Typography>
 
-          <Typography sx={{ fontSize: "16px" }} variant="h6" component="h6">
-           CLAIMABLE :
+          <Typography
+            sx={{ textAlign: "center", fontSize: "16px" }}
+            variant="h6"
+            component="h6"
+          >
+            CLAIMABLE :
           </Typography>
 
           <Typography variant="h6" component="h6" sx={{ color: "#7b9c13" }}>
@@ -65,13 +72,12 @@ export default function TotalRewards() {
               ethers.utils.formatEther(totalRewardsValue[1])}
           </Typography>
         </div>
-        
       ) : (
         <p>Nothing to show</p>
       )}
 
       <div className={classes.actions}>
-        <Button onClick={onClaim}>Claim</Button>
+        <ButtonPrimary onClick={onClaim}>CLAIM</ButtonPrimary>
       </div>
     </div>
   );

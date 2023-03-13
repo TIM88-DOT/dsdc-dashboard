@@ -22,7 +22,7 @@ export const StakedImageList = (props) => {
       {props.loading ? (
         <div className={classes.loading}>
           <Typography sx={{ marginBottom: "35px" }} variant="h6" component="h4">
-            Fetching your staked mutants...
+            Fetching your staked NFTs...
           </Typography>
           <CircularProgress color="warning"/>
         </div>

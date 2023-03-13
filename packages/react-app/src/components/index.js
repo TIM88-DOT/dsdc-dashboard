@@ -26,6 +26,43 @@ export const Button = styled.button`
   right: 8px;
 `;
 
+export const ButtonPrimary = styled.button`
+  border: none;
+  color: #282c34;
+  cursor: pointer;
+  margin: 0px 20px;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  background: #bfc500;
+  border-radius: 12px;
+  font-weight: bold;
+  font-size: 14px;
+  :hover{
+    color: #fff;
+    box-shadow: 0 5px 15px #7b9c13;
+  }
+`;
+
+export const ButtonSecondary = styled.button`
+  border: none;
+  color: #282c34;
+  cursor: pointer;
+  margin: 0px 20px;
+  padding: 12px 24px;
+  text-align: center;
+  text-decoration: none;
+  background: #7b9c13;
+  border-radius: 12px;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 14px;
+  :hover{
+    color: #fff;
+    box-shadow: 0 5px 15px #7b9c13;
+  }
+`;
+
 export const Container = styled.div`
   display: flex;
   flex-direction: column;

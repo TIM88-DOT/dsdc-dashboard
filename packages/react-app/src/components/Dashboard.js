@@ -21,7 +21,10 @@ import Swap from './Swap';
 import { grey } from '@mui/material/colors';
 import { Route, Routes } from 'react-router-dom';
 import NftStaking from './NftStaking/NftStaking';
+import StakedNfts from './StakedNfts/StakedNfts';
 import WalletButton from './WalletButton';
+import StakedMutants from './StakedMutants/StakedMutants';
+import TotalRewards from './TotalRewards/TotalRewards';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -182,7 +185,8 @@ function DashboardContent() {
               <Routes>
                 <Route path="/" element={<Swap />} />
                 <Route path="stake" element={<NftStaking />} />
-                <Route path="tube" element={<div>DDDD</div>} />
+                <Route path="stake/dsdc" element={<><StakedNfts /> <TotalRewards plan={0} /> </>} />
+                <Route path="stake/dsdc-mutants" element={<StakedMutants />} />
               </Routes>
             </Grid>
             <Copyright sx={{ position: "sticky", bottom: "-50px", left: "50%" }} />

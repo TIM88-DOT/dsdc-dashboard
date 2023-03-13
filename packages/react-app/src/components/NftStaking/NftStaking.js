@@ -5,8 +5,10 @@ import classes from "./NftStaking.module.css";
 function NftStaking(props) {
     return (
         <div className={classes.container}>
+            <>
             <MediaCard />
             <MediaCard mutants={true} />
+            </>
         </div>
     );
 }

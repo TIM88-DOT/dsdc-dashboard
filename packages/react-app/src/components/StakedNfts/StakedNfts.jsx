@@ -1,7 +1,4 @@
 import { StakedImageList } from "../StakedImageList/StakedImageList";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
@@ -13,18 +10,17 @@ import { useCall, useEthers, useContractFunction } from "@usedapp/core";
 import { Contract } from "@ethersproject/contracts";
 import axios from "axios";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
-import { Button, ButtonGreen } from "../index";
+import { ButtonPrimary, ButtonSecondary } from "../index";
 import { ethers } from "ethers";
 import { useGetIsApprovedForAll } from "../../hooks/useGetIsApprovedForAll";
 import { UnstakedImageList } from "../UnstakedImageList/UnstakedImageList";
-import { PlanContext } from "../../App";
 
 export default function StakedNfts(props) {
   const [tokensOfOwner, setTokensOfOwner] = useState([]);
   const [unstakedTokensOfOwner, setUnstakedTokensOfOwner] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const plan = useContext(PlanContext);
+  const plan = 0;
   const [selectedStakeNFT, setSelectedStakeNFT] = useState([]);
   const [selectedUnstakeNFT, setSelectedUnstakeNFT] = useState([]);
   const { account, chainId, library } = useEthers();
@@ -44,11 +40,11 @@ export default function StakedNfts(props) {
     padding: "15px",
   };
 
-  const mutantsContract = new Contract(addresses.mutants, abis.mutants);
+  const dsdcContract = new Contract(addresses.dsdc, abis.dsdc);
 
   const isApprovedForAll = useGetIsApprovedForAll(
-    addresses.mutants,
-    abis.mutants,
+    addresses.dsdc,
+    abis.dsdc,
     addresses.staking,
     account
   );
@@ -56,8 +52,8 @@ export default function StakedNfts(props) {
   const { error: walletOfOwnerError, value: walletOfOwnerValue } =
     useCall(
       account && {
-        contract: new Contract(addresses.mutants, abis.mutants),
-        method: "tokensOfOwner",
+        contract: new Contract(addresses.dsdc, abis.dsdc),
+        method: "walletOfOwner",
         args: [account],
       }
     ) ?? {};
@@ -80,27 +76,27 @@ export default function StakedNfts(props) {
   }
 
   const { state: setApprovalForAllState, send: setApprovalForAll } =
-    useContractFunction(mutantsContract, "setApprovalForAll", {
+    useContractFunction(dsdcContract, "setApprovalForAll", {
       transactionName: "setApprovalForAll",
     });
 
   const handleClose = () => setOpen(false);
 
-  const approveMaxMutants = async () => {
+  const approveMaxDsdc = async () => {
     await setApprovalForAll(addresses.staking, 1);
   };
 
   async function getNftsData(userNfts) {
     const tokenData = [];
     for (var j = 0; j < userNfts?.length; j++) {
-      const mutantsMetaData = await axios.get(
-        `https://drunkskunksdc.mypinata.cloud/ipfs/QmadV6pf2fzgmo3NDbx5fuyxNZUcTaNiGSKbNx3FoWkgAG/${userNfts[j]}.json`
+      const dsdcMetaData = await axios.get(
+        `https://bafybeigmbv6qevyposswcncodvket6bl34chc4j6326akxg2xj6arkmfwu.ipfs.nftstorage.link/${userNfts[j]}.json`
       );
       const nftTokenData = {
-        img: `https://drunkskunksdc.mypinata.cloud/ipfs/${mutantsMetaData.data.image.slice(
+        img: `https://drunkskunksdc.mypinata.cloud/ipfs/${dsdcMetaData.data.image.slice(
           7
         )}`,
-        title: mutantsMetaData.data.name,
+        title: dsdcMetaData.data.name,
         tokenId: userNfts[j],
       };
       tokenData.push(nftTokenData);
@@ -108,10 +104,6 @@ export default function StakedNfts(props) {
 
     return tokenData;
   }
-
-  const handleChange = (event) => {
-    event.target.checked ? props.setPlan(1) : props.setPlan(0);
-  };
 
   const onPickClick = async () => {
     if (account) {
@@ -133,7 +125,7 @@ export default function StakedNfts(props) {
 
   const onStake = async () => {
     const signer = library.getSigner();
-    const mutantsStakingContract = new ethers.Contract(
+    const dsdcStakingContract = new ethers.Contract(
       addresses.staking,
       abis.staking,
       signer
@@ -142,7 +134,7 @@ export default function StakedNfts(props) {
       try {
         console.log("plan", plan);
         console.log("selected Stake NFT", selectedStakeNFT);
-        await mutantsStakingContract.stake(plan, selectedStakeNFT);
+        await dsdcStakingContract.stake(plan, selectedStakeNFT);
       } catch (error) {
         console.log(error);
       }
@@ -151,7 +143,7 @@ export default function StakedNfts(props) {
 
   const onUnstake = async () => {
     const signer = library.getSigner();
-    const mutantsStakingContract = new ethers.Contract(
+    const dsdcStakingContract = new ethers.Contract(
       addresses.staking,
       abis.staking,
       signer
@@ -159,7 +151,7 @@ export default function StakedNfts(props) {
     if (selectedUnstakeNFT.length > 0) {
       setUnstakeLoading(true);
       try {
-        await mutantsStakingContract.unstake(plan, selectedUnstakeNFT);
+        await dsdcStakingContract.unstake(plan, selectedUnstakeNFT);
         setUnstakeLoading(false);
       } catch (error) {
         console.log(error);
@@ -171,7 +163,7 @@ export default function StakedNfts(props) {
   const onSelect = async () => {
     setConfirmLoading(true);
     if (isApprovedForAll === false) {
-      await approveMaxMutants();
+      await approveMaxDsdc();
       await onStake();
       setConfirmLoading(false);
       setOpen(false);
@@ -197,15 +189,7 @@ export default function StakedNfts(props) {
 
   return (
     <div className={classes.container}>
-      <h4>Your staked mutants</h4>
-      <FormGroup>
-        <FormControlLabel
-          control={
-            <Switch defaultChecked color="warning" onChange={handleChange} />
-          }
-          label="High APR (30 days lock)"
-        />
-      </FormGroup>
+      <h2>YOUR STAKED DSDC(s)</h2>
       {stakedNftsValue?.[0].length > 0 ? (
         loading ? (
           <div className={classes.loading}>
@@ -214,9 +198,9 @@ export default function StakedNfts(props) {
               variant="h6"
               component="h4"
             >
-              Fetching your staked mutants...
+              Fetching your staked DSDC...
             </Typography>
-            <CircularProgress color="warning"/>
+            <CircularProgress color="warning" />
           </div>
         ) : (
           <StakedImageList
@@ -229,12 +213,12 @@ export default function StakedNfts(props) {
         <p>Nothing to show</p>
       )}
       <div className={classes.actions}>
-        <Button onClick={onPickClick}>
-          {stakeLoading ? <CircularProgress color="warning"/> : "STAKE"}
-        </Button>
-        <ButtonGreen onClick={onUnstake}>
-          {unstakeLoading ? <CircularProgress color="warning"/> : "UNSTAKE"}
-        </ButtonGreen>
+        <ButtonPrimary onClick={onPickClick}>
+          {stakeLoading ? <CircularProgress size='1.5rem' color="warning" /> : "STAKE"}
+        </ButtonPrimary>
+        <ButtonSecondary onClick={onUnstake}>
+          {unstakeLoading ? <CircularProgress size='1.5rem' color="warning" /> : "UNSTAKE"}
+        </ButtonSecondary>
       </div>
 
       <Modal
@@ -246,24 +230,22 @@ export default function StakedNfts(props) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              SELECT YOUR MUTANT TO STAKE:
+              SELECT YOUR DSDC TO STAKE:
             </Typography>
-            {plan === 1 && (
-              <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                <span style={{ color: "red" }}>WARNING :</span> There will be a
-                90% fee if you claim or withdraw before 30 days with the current
-                plan.
-              </Typography>
-            )}
+
             <UnstakedImageList
               itemData={unstakedTokensOfOwner}
               selectedStakeNFT={selectedStakeNFT}
               setSelectedStakeNFT={setSelectedStakeNFT}
               loading={loading}
             />
-            <Button style={{ float: "right" }} onClick={onSelect}>
-              {confirmLoading ? <CircularProgress color="warning"/> : "CONFIRM"}
-            </Button>
+            <ButtonPrimary style={{ float: "right" }} onClick={onSelect}>
+              {confirmLoading ? (
+                <CircularProgress size='1.5rem' color="warning" />
+              ) : (
+                "CONFIRM"
+              )}
+            </ButtonPrimary>
           </Box>
         </Fade>
       </Modal>
