@@ -23,7 +23,7 @@ export default function StakedMutants(props) {
   const [unstakedTokensOfOwner, setUnstakedTokensOfOwner] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const plan = 0;
+  const plan = 1;
   const [selectedStakeNFT, setSelectedStakeNFT] = useState([]);
   const [selectedUnstakeNFT, setSelectedUnstakeNFT] = useState([]);
   const { account, library } = useEthers();
@@ -192,7 +192,7 @@ export default function StakedMutants(props) {
 
   return (
     <div className={classes.container}>
-      <h2>YOUR STAKED DSDC(s)</h2>
+      <h2>YOUR STAKED MUTANT(S)</h2>
       {stakedNftsValue?.[0].length > 0 ? (
         loading ? (
           <div className={classes.loading}>

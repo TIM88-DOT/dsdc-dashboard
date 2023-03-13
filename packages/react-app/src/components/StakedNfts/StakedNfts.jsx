@@ -189,7 +189,7 @@ export default function StakedNfts(props) {
 
   return (
     <div className={classes.container}>
-      <h2>YOUR STAKED DSDC(s)</h2>
+      <h2>YOUR STAKED DSDC(S)</h2>
       {stakedNftsValue?.[0].length > 0 ? (
         loading ? (
           <div className={classes.loading}>
