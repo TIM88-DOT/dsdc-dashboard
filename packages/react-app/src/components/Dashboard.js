@@ -64,6 +64,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
       position: 'relative',
       whiteSpace: 'nowrap',
       width: drawerWidth,
+      backgroundColor: "#020202",
       transition: theme.transitions.create('width', {
         easing: theme.transitions.easing.sharp,
         duration: theme.transitions.duration.enteringScreen,
@@ -148,6 +149,7 @@ function DashboardContent() {
               alignItems: 'center',
               justifyContent: 'flex-end',
               px: [1],
+              backgroundColor: (theme) => "#020202"
             }}
           >
             <img style={{
@@ -168,10 +170,7 @@ function DashboardContent() {
         <Box
           component="main"
           sx={{
-            backgroundColor: (theme) =>
-              theme.palette.mode === 'light'
-                ? theme.palette.grey[100]
-                : theme.palette.grey[900],
+            backgroundColor: (theme) => "#020202",
             flexGrow: 1,
             height: '100vh',
             overflow: 'auto',
