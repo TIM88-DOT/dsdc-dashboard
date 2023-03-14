@@ -186,7 +186,7 @@ function DashboardContent() {
                 <Route path="/" element={<Swap />} />
                 <Route path="stake" element={<NftStaking />} />
                 <Route path="stake/dsdc" element={<><StakedNfts /> <TotalRewards plan={0} /> </>} />
-                <Route path="stake/dsdc-mutants" element={<StakedMutants />} />
+                <Route path="stake/dsdc-mutants" element={<><StakedMutants /> <TotalRewards plan={1} /> </>} />
               </Routes>
             </Grid>
             <Copyright sx={{ position: "sticky", bottom: "-50px", left: "50%" }} />
