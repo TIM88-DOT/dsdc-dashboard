@@ -28,14 +28,14 @@ export const Button = styled.button`
 
 export const ButtonPrimary = styled.button`
   border: none;
-  color: #282c34;
+  color: #000;
   cursor: pointer;
   margin: 0px 20px;
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   background: #bfc500;
-  border-radius: 12px;
+  border-radius: 10px;
   font-weight: bold;
   font-size: 14px;
   :hover{
@@ -46,14 +46,14 @@ export const ButtonPrimary = styled.button`
 
 export const ButtonSecondary = styled.button`
   border: none;
-  color: #282c34;
+  color: #000;
   cursor: pointer;
   margin: 0px 20px;
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
   background: #7b9c13;
-  border-radius: 12px;
+  border-radius: 10px;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;

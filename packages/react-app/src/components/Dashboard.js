@@ -115,6 +115,7 @@ function DashboardContent() {
         <AppBar position="absolute" open={open}>
           <Toolbar
             sx={{
+              backgroundColor : '#121212',
               pr: '24px', // keep right padding when drawer closed
             }}
           >
