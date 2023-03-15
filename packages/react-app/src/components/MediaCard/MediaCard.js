@@ -29,7 +29,7 @@ export default function MediaCard(props) {
     height: 190, backgroundSize: "45%"
   }
   return (
-    <Card className={classes[defaultClass]}>
+    <Card sx={{ backgroundImage: "none" }} className={classes[defaultClass]}>
       <CardMedia
         sx={CardMediaStyle}
         image={props.mutants ? mutantLogo : logo}

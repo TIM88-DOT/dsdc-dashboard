@@ -66,7 +66,7 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListSubheader component="div" inset>
+    <ListSubheader sx={{backgroundColor: "#020202"}} component="div" inset>
       Socials
     </ListSubheader>
     <ListItemButton>
