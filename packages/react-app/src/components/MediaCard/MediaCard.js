@@ -9,12 +9,13 @@ import logo from "../../assets/images/logo.png";
 import mutantLogo from "../../assets/images/mutants-logo.png";
 import { Link } from "react-router-dom";
 import classes from "./MediaCard.module.css"
+import { ButtonPrimary } from '..';
 
 export default function MediaCard(props) {
   const defaultClass = props.mutants ? "card--mutant" : "card"
   const uri = props.mutants ? `dsdc-mutants` : `dsdc`
   const linkStyle = {
-    margin: " 0",
+    margin: "0",
     fontFamily: "Montserrat, sans-serif",
     fontWeight: "400",
     fontSize: "1rem",
@@ -29,7 +30,7 @@ export default function MediaCard(props) {
     height: 190, backgroundSize: "45%"
   }
   return (
-    <Card sx={{ backgroundImage: "none" }} className={classes[defaultClass]}>
+    <Card sx={{ backgroundImage: "none", border: "1px solid #bfc500", backgroundColor: "transparent" }} className={classes[defaultClass]}>
       <CardMedia
         sx={CardMediaStyle}
         image={props.mutants ? mutantLogo : logo}
@@ -55,9 +56,9 @@ export default function MediaCard(props) {
             </Typography>
           </>}
       </CardContent>
-      <CardActions sx={{ justifyContent: "center", marginTop: "50px" }}>
+      <CardActions sx={{ justifyContent: "center", marginTop: "50px", marginBottom:"20px" }}>
         <Link style={linkStyle} to={uri}>
-          <Button size="medium">Select</Button>
+          <ButtonPrimary>Select</ButtonPrimary>
         </Link>
       </CardActions>
     </Card>

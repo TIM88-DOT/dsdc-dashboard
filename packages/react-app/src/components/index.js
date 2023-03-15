@@ -46,20 +46,21 @@ export const ButtonPrimary = styled.button`
 
 export const ButtonSecondary = styled.button`
   border: none;
-  color: #000;
+  color: #fff;
   cursor: pointer;
   margin: 0px 20px;
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
-  background: #7b9c13;
+  background: transparent;
   border-radius: 10px;
   font-style: normal;
   font-weight: bold;
   font-size: 14px;
+  border: 1px solid #fff;
   :hover{
     color: #fff;
-    box-shadow: 0 5px 15px #7b9c13;
+    box-shadow: 0 5px 15px #fff;
   }
 `;
 

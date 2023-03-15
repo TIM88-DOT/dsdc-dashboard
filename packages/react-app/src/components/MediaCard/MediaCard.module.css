@@ -1,10 +1,10 @@
 .card {
     width: 320px;
-    height: 400px;
+    height: 415px;
 }
 
 .card--mutant {
-    height: 400px;
+    height: 415px;
     width: 320px;
     border-radius: 10px;
     margin-Left: 55px;
