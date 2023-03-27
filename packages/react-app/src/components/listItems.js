@@ -4,9 +4,6 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
-import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
-import PeopleIcon from '@mui/icons-material/People';
-import MenuIcon from '@mui/icons-material/Menu';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import PublicIcon from '@mui/icons-material/Public';
@@ -52,13 +49,6 @@ export const mainListItems = (
         <MonetizationOnIcon />
       </ListItemIcon>
       <ListItemText primary="Token Staking" />
-    </ListItemButton>
-
-    <ListItemButton>
-      <ListItemIcon>
-        <AgricultureIcon />
-      </ListItemIcon>
-      <ListItemText primary="LP Farming" />
     </ListItemButton>
 
   </React.Fragment>
