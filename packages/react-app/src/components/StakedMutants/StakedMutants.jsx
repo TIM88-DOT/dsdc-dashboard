@@ -56,7 +56,7 @@ export default function StakedMutants(props) {
     useCall(
       account && {
         contract: new Contract(addresses.mutants, abis.mutants),
-        method: "tokensOfOwner",
+        method: "walletOfOwner",
         args: [account],
       }
     ) ?? {};

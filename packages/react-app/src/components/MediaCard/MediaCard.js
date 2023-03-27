@@ -36,7 +36,7 @@ export default function MediaCard(props) {
         image={props.mutants ? mutantLogo : logo}
         title={props.mutants ? "DSDC Mutants Staking" : "DSDC Staking"}
       />
-      <CardContent>
+      <CardContent sx={{ padding: "14px" }}>
         <Typography gutterBottom variant="h5" component="div">
           {props.mutants ? "Mutants Staking" : "DSDC Staking"}
         </Typography>
@@ -56,7 +56,7 @@ export default function MediaCard(props) {
             </Typography>
           </>}
       </CardContent>
-      <CardActions sx={{ justifyContent: "center", marginTop: "50px", marginBottom:"20px" }}>
+      <CardActions sx={{ justifyContent: "center", marginTop: "50px", marginBottom: "20px" }}>
         <Link style={linkStyle} to={uri}>
           <ButtonPrimary>Select</ButtonPrimary>
         </Link>

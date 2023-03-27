@@ -2,19 +2,19 @@
 	{
 		"inputs": [
 			{
-				"internalType": "address",
-				"name": "_dsdc",
-				"type": "address"
+				"internalType": "string",
+				"name": "_name",
+				"type": "string"
 			},
 			{
-				"internalType": "address",
-				"name": "_toxicbeer",
-				"type": "address"
+				"internalType": "string",
+				"name": "_symbol",
+				"type": "string"
 			},
 			{
-				"internalType": "address",
-				"name": "_stink",
-				"type": "address"
+				"internalType": "string",
+				"name": "_initBaseURI",
+				"type": "string"
 			}
 		],
 		"stateMutability": "nonpayable",
@@ -68,56 +68,6 @@
 			}
 		],
 		"name": "ApprovalForAll",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "timeStamp",
-				"type": "uint256"
-			}
-		],
-		"name": "MutationComplete",
-		"type": "event"
-	},
-	{
-		"anonymous": false,
-		"inputs": [
-			{
-				"indexed": false,
-				"internalType": "address",
-				"name": "owner",
-				"type": "address"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			},
-			{
-				"indexed": false,
-				"internalType": "uint256",
-				"name": "timeStamp",
-				"type": "uint256"
-			}
-		],
-		"name": "MutationStarted",
 		"type": "event"
 	},
 	{
@@ -216,89 +166,12 @@
 	},
 	{
 		"inputs": [],
-		"name": "claimMutant",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			}
-		],
-		"name": "consumeToxicBeer",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "dsdc",
+		"name": "cost",
 		"outputs": [
-			{
-				"internalType": "contract IDSDC",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
 			{
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"name": "dsdcBeingMutated",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256",
-				"name": "tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "dsdcCanMutate",
-		"outputs": [
-			{
-				"internalType": "bool",
-				"name": "",
-				"type": "bool"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "tokenIds",
-				"type": "uint256[]"
-			}
-		],
-		"name": "dsdcsCanMutate",
-		"outputs": [
-			{
-				"internalType": "bool[]",
-				"name": "transformable",
-				"type": "bool[]"
 			}
 		],
 		"stateMutability": "view",
@@ -318,25 +191,6 @@
 				"internalType": "address",
 				"name": "",
 				"type": "address"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "userAddress",
-				"type": "address"
-			}
-		],
-		"name": "getUserDsdcsToBeMutated",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
 			}
 		],
 		"stateMutability": "view",
@@ -368,7 +222,7 @@
 	},
 	{
 		"inputs": [],
-		"name": "mutationDuration",
+		"name": "maxMintAmount",
 		"outputs": [
 			{
 				"internalType": "uint256",
@@ -381,15 +235,28 @@
 	},
 	{
 		"inputs": [],
-		"name": "mutationIsActive",
+		"name": "maxSupply",
 		"outputs": [
 			{
-				"internalType": "bool",
+				"internalType": "uint256",
 				"name": "",
-				"type": "bool"
+				"type": "uint256"
 			}
 		],
 		"stateMutability": "view",
+		"type": "function"
+	},
+	{
+		"inputs": [
+			{
+				"internalType": "uint256",
+				"name": "_mintAmount",
+				"type": "uint256"
+			}
+		],
+		"name": "mint",
+		"outputs": [],
+		"stateMutability": "payable",
 		"type": "function"
 	},
 	{
@@ -438,54 +305,29 @@
 		"type": "function"
 	},
 	{
-		"inputs": [],
-		"name": "pauseMutations",
+		"inputs": [
+			{
+				"internalType": "bool",
+				"name": "_state",
+				"type": "bool"
+			}
+		],
+		"name": "pause",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
 		"inputs": [],
-		"name": "price",
+		"name": "paused",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "bool",
 				"name": "",
-				"type": "uint256"
+				"type": "bool"
 			}
 		],
 		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "_tokenId",
-				"type": "uint256"
-			}
-		],
-		"name": "recoverNonFungibleToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_token",
-				"type": "address"
-			}
-		],
-		"name": "recoverToken",
-		"outputs": [],
-		"stateMutability": "nonpayable",
 		"type": "function"
 	},
 	{
@@ -581,7 +423,7 @@
 		"inputs": [
 			{
 				"internalType": "string",
-				"name": "_uri",
+				"name": "_newBaseURI",
 				"type": "string"
 			}
 		],
@@ -594,11 +436,11 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_newDuration",
+				"name": "_newCost",
 				"type": "uint256"
 			}
 		],
-		"name": "setMutationDuration",
+		"name": "setCost",
 		"outputs": [],
 		"stateMutability": "nonpayable",
 		"type": "function"
@@ -607,33 +449,13 @@
 		"inputs": [
 			{
 				"internalType": "uint256",
-				"name": "_price",
+				"name": "_newmaxMintAmount",
 				"type": "uint256"
 			}
 		],
-		"name": "setPrice",
+		"name": "setmaxMintAmount",
 		"outputs": [],
 		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "startMutations",
-		"outputs": [],
-		"stateMutability": "nonpayable",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "stink",
-		"outputs": [
-			{
-				"internalType": "contract IERC20",
-				"name": "",
-				"type": "address"
-			}
-		],
-		"stateMutability": "view",
 		"type": "function"
 	},
 	{
@@ -731,59 +553,6 @@
 		"type": "function"
 	},
 	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "_owner",
-				"type": "address"
-			}
-		],
-		"name": "tokensOfOwner",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "user",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "cursor",
-				"type": "uint256"
-			},
-			{
-				"internalType": "uint256",
-				"name": "size",
-				"type": "uint256"
-			}
-		],
-		"name": "tokensOfOwnerBySize",
-		"outputs": [
-			{
-				"internalType": "uint256[]",
-				"name": "",
-				"type": "uint256[]"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
 		"inputs": [],
 		"name": "totalSupply",
 		"outputs": [
@@ -791,19 +560,6 @@
 				"internalType": "uint256",
 				"name": "",
 				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [],
-		"name": "toxicbeer",
-		"outputs": [
-			{
-				"internalType": "contract IToxicBeer",
-				"name": "",
-				"type": "address"
 			}
 		],
 		"stateMutability": "view",
@@ -849,40 +605,16 @@
 		"inputs": [
 			{
 				"internalType": "address",
-				"name": "",
-				"type": "address"
-			},
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"name": "userDsdcToBeMutated",
-		"outputs": [
-			{
-				"internalType": "uint256",
-				"name": "",
-				"type": "uint256"
-			}
-		],
-		"stateMutability": "view",
-		"type": "function"
-	},
-	{
-		"inputs": [
-			{
-				"internalType": "address",
-				"name": "",
+				"name": "_owner",
 				"type": "address"
 			}
 		],
-		"name": "userMutationDuration",
+		"name": "walletOfOwner",
 		"outputs": [
 			{
-				"internalType": "uint256",
+				"internalType": "uint256[]",
 				"name": "",
-				"type": "uint256"
+				"type": "uint256[]"
 			}
 		],
 		"stateMutability": "view",
@@ -890,9 +622,9 @@
 	},
 	{
 		"inputs": [],
-		"name": "withdrawStink",
+		"name": "withdraw",
 		"outputs": [],
-		"stateMutability": "nonpayable",
+		"stateMutability": "payable",
 		"type": "function"
 	}
 ]
