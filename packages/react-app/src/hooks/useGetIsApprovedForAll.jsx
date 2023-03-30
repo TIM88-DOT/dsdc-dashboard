@@ -1,5 +1,5 @@
 import { Contract } from "@ethersproject/contracts";
-import { useCall, useEthers } from "@usedapp/core";
+import { useCall } from "@usedapp/core";
 
 export function useGetIsApprovedForAll(
   contractAddress,

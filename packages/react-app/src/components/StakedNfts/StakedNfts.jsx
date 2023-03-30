@@ -15,6 +15,9 @@ import { ethers } from "ethers";
 import { useGetIsApprovedForAll } from "../../hooks/useGetIsApprovedForAll";
 import { UnstakedImageList } from "../UnstakedImageList/UnstakedImageList";
 
+import useGetUserNFTs from "../../hooks/useGetUserNFTs";
+import useGetStakedNFTs from "../../hooks/useGetStakedNFTs";
+
 export default function StakedNfts(props) {
   const [tokensOfOwner, setTokensOfOwner] = useState([]);
   const [unstakedTokensOfOwner, setUnstakedTokensOfOwner] = useState([]);
@@ -49,32 +52,12 @@ export default function StakedNfts(props) {
     account
   );
 
-  const { error: walletOfOwnerError, value: walletOfOwnerValue } =
-    useCall(
-      account && {
-        contract: new Contract(addresses.dsdc, abis.dsdc),
-        method: "walletOfOwner",
-        args: [account],
-      }
-    ) ?? {};
-
-  if (walletOfOwnerError) {
-    console.log(walletOfOwnerError);
-  }
-
-  const { error: stakedNftsError, value: stakedNftsValue } =
-    useCall(
-      account && {
-        contract: new Contract(addresses.staking, abis.staking),
-        method: "getStakedTokens",
-        args: [plan, account],
-      }
-    ) ?? {};
-
-  if (stakedNftsError) {
-    console.log(stakedNftsError);
-  }
-
+ const walletOfOwnerValue = useGetUserNFTs();
+  console.log("users nfts", walletOfOwnerValue); 
+  
+  const stakedNftsValue = useGetStakedNFTs(plan);
+  console.log("users staked nfts", stakedNftsValue); 
+ 
   const { state: setApprovalForAllState, send: setApprovalForAll } =
     useContractFunction(dsdcContract, "setApprovalForAll", {
       transactionName: "setApprovalForAll",
@@ -114,8 +97,7 @@ export default function StakedNfts(props) {
         setOpen(true);
         setLoading(true);
         setSelectedUnstakeNFT([]);
-        const allNfts = walletOfOwnerValue?.[0].map((e) => Number(e));
-        const tokensOfOwner = await getNftsData(allNfts);
+        const tokensOfOwner = await getNftsData(walletOfOwnerValue);
         setUnstakedTokensOfOwner(tokensOfOwner);
         setLoading(false);
       }
@@ -174,23 +156,23 @@ export default function StakedNfts(props) {
     setOpen(false);
   };
 
-  useEffect(() => {
-    if (account) {
-      const stakedNfts = stakedNftsValue?.[0].map((e) => Number(e));
-      console.log("staked nfts", stakedNfts);
-      getData(stakedNfts);
-    }
+  // useEffect(() => {
+  //   if (account && stakedNftsValue) {
+  //     getData(stakedNftsValue);
+  //   }
 
-    async function getData(stakedNfts) {
-      const tokenData = await getNftsData(stakedNfts);
-      setTokensOfOwner(tokenData);
-    }
-  }, [account, stakedNftsValue]);
+  //   async function getData(stakedNfts) {
+  //     const tokenData = await getNftsData(stakedNfts);
+  //     setTokensOfOwner(tokenData);
+  //   }
+  // }, [account]);
+
+  
 
   return (
     <div className={classes.container}>
       <h2>YOUR STAKED DSDC(S)</h2>
-      {stakedNftsValue?.[0].length > 0 ? (
+      {stakedNftsValue?.length > 0 ? (
         loading ? (
           <div className={classes.loading}>
             <Typography
@@ -206,7 +188,7 @@ export default function StakedNfts(props) {
           <StakedImageList
             selectedUnstakeNFT={selectedUnstakeNFT}
             setSelectedUnstakeNFT={setSelectedUnstakeNFT}
-            itemData={tokensOfOwner}
+            itemData={stakedNftsValue}
           />
         )
       ) : (

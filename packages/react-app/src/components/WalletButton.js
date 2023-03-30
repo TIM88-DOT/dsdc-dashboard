@@ -1,5 +1,5 @@
 import { Button } from "../components";
-import { Mumbai, shortenAddress, useEthers, useLookupAddress } from "@usedapp/core";
+import { BSCTestnet, shortenAddress, useEthers, useLookupAddress } from "@usedapp/core";
 import React, { useEffect, useState } from "react";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -22,9 +22,9 @@ export default function WalletButton() {
       walletconnect: {
         package: WalletConnectProvider,
         options: {
-          chainId: 8001,
+          chainId: 97,
           rpc: {
-            8001: "https://matic-mumbai.chainstacklabs.com",
+            97: "https://data-seed-prebsc-1-s3.binance.org:8545",
           },
         },
       },
@@ -59,8 +59,8 @@ export default function WalletButton() {
   }, [error]);
 
   useEffect(() => {
-    if (chainId !== Mumbai.chainId) {
-      switchNetwork(Mumbai.chainId)
+    if (chainId !== BSCTestnet.chainId) {
+      switchNetwork(BSCTestnet.chainId)
     }
     if (error) {
       console.error("Error while connecting wallet:", error.message);

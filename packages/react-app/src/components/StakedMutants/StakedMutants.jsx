@@ -201,7 +201,7 @@ export default function StakedMutants(props) {
               variant="h6"
               component="h4"
             >
-              Fetching your staked DSDC...
+              Fetching your staked mutants...
             </Typography>
             <CircularProgress color="warning" />
           </div>
@@ -233,7 +233,7 @@ export default function StakedMutants(props) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              SELECT YOUR DSDC TO STAKE:
+              SELECT YOUR MUTANT TO STAKE:
             </Typography>
 
             <UnstakedImageList

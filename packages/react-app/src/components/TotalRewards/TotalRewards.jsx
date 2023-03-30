@@ -1,29 +1,18 @@
 import classes from "./TotalRewards.module.scss";
 import { ButtonPrimary } from "../index";
 import Typography from "@mui/material/Typography";
-import { useCall, useEthers } from "@usedapp/core";
-import { Contract } from "@ethersproject/contracts";
-import { useState, useContext } from "react";
+import { useEthers } from "@usedapp/core";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
 import { ethers } from "ethers";
+import useGetTotalRewards from "../../hooks/useGetTotalRewards";
 
 export default function TotalRewards(props) {
-  const { account, chainId, library } = useEthers();
-  const [loading, setLoading] = useState(false);
+  const { account, library } = useEthers();
+  //const [loading, setLoading] = useState(false);
   const plan = props.plan;
-  const { error: totalRewardsError, value: totalRewardsValue } =
-    useCall(
-      account && {
-        contract: new Contract(addresses.staking, abis.staking),
-        method: "getEarnedRewards",
-        args: [plan, account],
-      }
-    ) ?? {};
+  const totalRewardsValue = useGetTotalRewards(plan);
+  console.log("totalRewards", totalRewardsValue);
 
-  if (totalRewardsError) {
-    console.log(totalRewardsError);
-  } else {
-  }
   const onClaim = async () => {
     if (account) {
       const signer = library.getSigner();
