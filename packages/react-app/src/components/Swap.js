@@ -4,7 +4,7 @@ import { Button, Card, CardBody, Flex, Heading, Text, Input, TokenImage, SwapVer
 import { dark } from '@pancakeswap/uikit'
 import { ButtonPrimary } from '.';
 import BNB from '../assets/images/bnb.png';
-import STINK from '../assets/images/stink.jpg';
+import STINK from '../assets/images/logo.jpg';
 import { border } from '@mui/system';
 
 const Swap = () => {

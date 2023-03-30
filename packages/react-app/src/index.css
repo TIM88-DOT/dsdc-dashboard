@@ -3,7 +3,6 @@ body {
   font-family: "Montserrat", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-transform: uppercase!important;
 }
 
 code {
@@ -12,4 +11,9 @@ code {
 
 .css-mygxps-MuiButtonBase-root-MuiListItemButton-root {
   border-radius: 12px !important;
+}
+
+*{
+  text-transform: uppercase!important;
+  font-weight: 750!important;
 }

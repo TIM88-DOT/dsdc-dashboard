@@ -5,7 +5,7 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.jpg";
 import mutantLogo from "../../assets/images/mutants-logo.png";
 import { Link } from "react-router-dom";
 import classes from "./MediaCard.module.css"
@@ -25,9 +25,9 @@ export default function MediaCard(props) {
     textDecoration: "none"
   }
   const CardMediaStyle = props.mutants ? {
-    height: 190, backgroundSize: "55%"
+    height: 190, backgroundSize: "50%"
   } : {
-    height: 190, backgroundSize: "45%"
+    height: 190, backgroundSize: "50%"
   }
   return (
     <Card sx={{ backgroundImage: "none", border: "1px solid #bfc500", backgroundColor: "transparent" }} className={classes[defaultClass]}>
@@ -36,7 +36,7 @@ export default function MediaCard(props) {
         image={props.mutants ? mutantLogo : logo}
         title={props.mutants ? "DSDC Mutants Staking" : "DSDC Staking"}
       />
-      <CardContent sx={{ padding: "14px" }}>
+      <CardContent sx={{ textAlign: "center", padding: "14px" }}>
         <Typography gutterBottom variant="h5" component="div">
           {props.mutants ? "Mutants Staking" : "DSDC Staking"}
         </Typography>
@@ -49,10 +49,10 @@ export default function MediaCard(props) {
           </Typography></> :
           <>
             <Typography variant="body2" color="text.secondary">
-              ◘ Lower APR
+              ◘ Can unstake anytime
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              ◘ Can unstake anytime
+              ◘ Lower APR
             </Typography>
           </>}
       </CardContent>

@@ -56,32 +56,40 @@ export const mainListItems = (
 
 export const secondaryListItems = (
   <React.Fragment>
-    <ListSubheader sx={{backgroundColor: "#020202"}} component="div" inset>
+    <ListSubheader sx={{ backgroundColor: "#020202" }} component="div" inset>
       SOCIALS
     </ListSubheader>
-    <ListItemButton>
-      <ListItemIcon>
-        <TelegramIcon />
-      </ListItemIcon>
-      <ListItemText primary="TELEGRAM" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <TwitterIcon />
-      </ListItemIcon>
-      <ListItemText primary="TWITTER" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PublicIcon />
-      </ListItemIcon>
-      <ListItemText primary="WEBSITE" />
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <DescriptionIcon />
-      </ListItemIcon>
-      <ListItemText primary="DOCS" />
-    </ListItemButton>
+    <a style={linkStyle} href="https://t.me/DrunkSkunksDCOfficial" target="_blank" rel="noopener noreferrer">
+      <ListItemButton>
+        <ListItemIcon>
+          <TelegramIcon />
+        </ListItemIcon>
+        <ListItemText primary="TELEGRAM" />
+      </ListItemButton>
+    </a>
+    <a style={linkStyle} href="https://twitter.com/DrunkSkunksDC" target="_blank" rel="noopener noreferrer">
+      <ListItemButton>
+        <ListItemIcon>
+          <TwitterIcon />
+        </ListItemIcon>
+        <ListItemText primary="TWITTER" />
+      </ListItemButton>
+    </a>
+    <a style={linkStyle} href="https://drunkskunksdc.com/" target="_blank" rel="noopener noreferrer">
+      <ListItemButton>
+        <ListItemIcon>
+          <PublicIcon />
+        </ListItemIcon>
+        <ListItemText primary="WEBSITE" />
+      </ListItemButton>
+    </a>
+    <a style={linkStyle} href="https://docs.drunkskunksdc.com/" target="_blank" rel="noopener noreferrer">
+      <ListItemButton>
+        <ListItemIcon>
+          <DescriptionIcon />
+        </ListItemIcon>
+        <ListItemText primary="DOCS" />
+      </ListItemButton>
+    </a>
   </React.Fragment>
 );
