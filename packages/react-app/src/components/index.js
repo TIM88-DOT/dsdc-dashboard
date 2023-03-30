@@ -14,7 +14,7 @@ export const Button = styled.button`
   background-color: #bfc500;
   border: none;
   border-radius: 8px;
-  color: #fff;
+  color: #000;
   cursor: pointer;
   font-size: 16px;
   margin: 0px 5px;
@@ -23,7 +23,17 @@ export const Button = styled.button`
   text-align: center;
   text-decoration: none;
   position: absolute;
+  text-transform: uppercase;
   right: 8px;
+  @media (max-width: 768px) {
+    padding: 8px 16px;
+    font-size: 10px;
+    margin: 0px;
+  }
+  :hover{
+    color: #fff;
+    box-shadow: 0 5px 15px #7b9c13;
+  }
 `;
 
 export const ButtonPrimary = styled.button`
@@ -34,6 +44,7 @@ export const ButtonPrimary = styled.button`
   padding: 12px 24px;
   text-align: center;
   text-decoration: none;
+  text-transform: uppercase;
   background: #bfc500;
   border-radius: 10px;
   font-weight: bold;
@@ -45,6 +56,7 @@ export const ButtonPrimary = styled.button`
 `;
 
 export const ButtonSecondary = styled.button`
+text-transform: uppercase;
   border: none;
   color: #fff;
   cursor: pointer;

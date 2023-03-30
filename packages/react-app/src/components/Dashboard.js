@@ -139,7 +139,7 @@ function DashboardContent() {
               noWrap
               sx={{ flexGrow: 1 }}
             >
-              Dashboard
+              DASHBOARD
             </Typography>
             <WalletButton />
           </Toolbar>

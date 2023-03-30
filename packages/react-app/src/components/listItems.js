@@ -7,7 +7,7 @@ import SwapVertIcon from '@mui/icons-material/SwapVert';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
 import PublicIcon from '@mui/icons-material/Public';
-import AgricultureIcon from '@mui/icons-material/Agriculture';
+import DescriptionIcon from '@mui/icons-material/Description';
 import TelegramIcon from '@mui/icons-material/Telegram';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from "react-router-dom";
@@ -31,7 +31,7 @@ export const mainListItems = (
         <ListItemIcon>
           <SwapVertIcon />
         </ListItemIcon>
-        Swap
+        <ListItemText primary="SWAP" />
       </ListItemButton>
     </Link>
 
@@ -40,7 +40,7 @@ export const mainListItems = (
         <ListItemIcon>
           <RocketLaunchIcon />
         </ListItemIcon>
-        NFT Staking
+        <ListItemText primary="NFT STAKING" />
       </ListItemButton>
     </Link>
 
@@ -48,7 +48,7 @@ export const mainListItems = (
       <ListItemIcon>
         <MonetizationOnIcon />
       </ListItemIcon>
-      <ListItemText primary="Token Staking" />
+      <ListItemText primary="TOKEN STAKING" />
     </ListItemButton>
 
   </React.Fragment>
@@ -57,25 +57,31 @@ export const mainListItems = (
 export const secondaryListItems = (
   <React.Fragment>
     <ListSubheader sx={{backgroundColor: "#020202"}} component="div" inset>
-      Socials
+      SOCIALS
     </ListSubheader>
     <ListItemButton>
       <ListItemIcon>
         <TelegramIcon />
       </ListItemIcon>
-      <ListItemText primary="Telegram" />
+      <ListItemText primary="TELEGRAM" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <TwitterIcon />
       </ListItemIcon>
-      <ListItemText primary="Twitter" />
+      <ListItemText primary="TWITTER" />
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PublicIcon />
       </ListItemIcon>
-      <ListItemText primary="Website" />
+      <ListItemText primary="WEBSITE" />
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <DescriptionIcon />
+      </ListItemIcon>
+      <ListItemText primary="DOCS" />
     </ListItemButton>
   </React.Fragment>
 );

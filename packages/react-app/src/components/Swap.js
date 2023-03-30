@@ -52,6 +52,7 @@ const Swap = () => {
       }}>
         <CardBody style={{
           background: "#020202",
+          padding: "18px"
         }}>
           <Flex justifyContent="space-between" alignItems="center">
             <Heading>Swap</Heading>
