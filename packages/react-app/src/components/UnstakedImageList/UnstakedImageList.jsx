@@ -23,7 +23,7 @@ export const UnstakedImageList = (props) => {
       {props.loading ? (
         <div className={classes.loading}>
           <Typography sx={{ marginBottom: "35px" }} variant="h6" component="h4">
-            Fetching your available mutants...
+            Fetching your available nfts...
           </Typography>
           <CircularProgress color="warning"/>
         </div>

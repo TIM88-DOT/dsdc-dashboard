@@ -25,6 +25,7 @@ import StakedNfts from './StakedNfts/StakedNfts';
 import WalletButton from './WalletButton';
 import StakedMutants from './StakedMutants/StakedMutants';
 import TotalRewards from './TotalRewards/TotalRewards';
+import DefaultSwap from './DefaultSwap';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -116,7 +117,7 @@ function DashboardContent() {
           <Toolbar
             sx={{
               backgroundColor: "#020202",
-              borderBottom:"1px solid #bfc500",
+              borderBottom: "1px solid #bfc500",
               pr: '24px', // keep right padding when drawer closed
             }}
           >
@@ -176,7 +177,7 @@ function DashboardContent() {
               justifyContent="center"
               alignItems="center" item xs={12}>
               <Routes>
-                <Route path="/" element={<Swap />} />
+                <Route path="/" element={<DefaultSwap />} />
                 <Route path="stake" element={<NftStaking />} />
                 <Route path="stake/dsdc" element={<><StakedNfts /> <TotalRewards plan={0} /> </>} />
                 <Route path="stake/dsdc-mutants" element={<><StakedMutants /> <TotalRewards plan={1} /> </>} />

@@ -13,7 +13,7 @@ export default function TotalRewards(props) {
   const [loading, setLoading] = useState(false);
   const plan = props.plan;
   const totalRewardsValue = useGetTotalRewards(plan);
-  console.log("totalRewards", totalRewardsValue);
+  //console.log("totalRewards", totalRewardsValue);
 
   const onClaim = async () => {
     if (account) {

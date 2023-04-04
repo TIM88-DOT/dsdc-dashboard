@@ -10,7 +10,7 @@ const useGetUserNFTs = (mutants) => {
     const fetchIds = async () => {
       try {
         const provider = new ethers.providers.JsonRpcProvider(
-          "https://data-seed-prebsc-1-s3.binance.org:8545"
+          "https://bsc-dataseed.binance.org"
         );
         let contract = new ethers.Contract(addresses.dsdc, abis.dsdc, provider);
         if (mutants) {

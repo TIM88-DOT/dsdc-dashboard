@@ -1,5 +1,5 @@
 import { Button } from "../components";
-import { BSCTestnet, shortenAddress, useEthers, useLookupAddress } from "@usedapp/core";
+import { BSC, shortenAddress, useEthers, useLookupAddress } from "@usedapp/core";
 import React, { useEffect, useState } from "react";
 import Web3Modal from "web3modal";
 import WalletConnectProvider from "@walletconnect/web3-provider";
@@ -22,9 +22,9 @@ export default function WalletButton() {
       walletconnect: {
         package: WalletConnectProvider,
         options: {
-          chainId: 97,
+          chainId: 56,
           rpc: {
-            97: "https://data-seed-prebsc-1-s3.binance.org:8545",
+            56: "https://bsc-dataseed.binance.org",
           },
         },
       },
@@ -59,8 +59,8 @@ export default function WalletButton() {
   }, [error]);
 
   useEffect(() => {
-    if (chainId !== BSCTestnet.chainId) {
-      switchNetwork(BSCTestnet.chainId)
+    if (chainId !== BSC.chainId) {
+      switchNetwork(BSC.chainId)
     }
     if (error) {
       console.error("Error while connecting wallet:", error.message);

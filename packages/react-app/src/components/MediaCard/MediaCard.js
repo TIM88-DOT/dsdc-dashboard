@@ -37,7 +37,7 @@ export default function MediaCard(props) {
         title={props.mutants ? "DSDC Mutants Staking" : "DSDC Staking"}
       />
       <CardContent sx={{ textAlign: "center", padding: "14px" }}>
-        <Typography gutterBottom variant="h5" component="div">
+        <Typography sx={{ whiteSpace: "nowrap" }} gutterBottom variant="h5" component="div">
           {props.mutants ? "Mutants Staking" : "DSDC Staking"}
         </Typography>
         {props.mutants ? <>

@@ -1,6 +1,6 @@
 import "./index.css";
 
-import { DAppProvider, BSCTestnet } from "@usedapp/core";
+import { DAppProvider, BSC } from "@usedapp/core";
 import React from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter } from 'react-router-dom';
@@ -12,9 +12,9 @@ import App from "./App";
 // https://infura.io/register
 
 const config = {
-  readOnlyChainId: BSCTestnet.chainId,
+  readOnlyChainId: BSC.chainId,
   readOnlyUrls: {
-    [BSCTestnet.chainId]: "https://data-seed-prebsc-1-s3.binance.org:8545"
+    [BSC.chainId]: "https://bsc-dataseed.binance.org"
   },
 }
 
