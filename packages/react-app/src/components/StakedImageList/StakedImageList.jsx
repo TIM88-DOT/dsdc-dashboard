@@ -7,7 +7,7 @@ import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
 
 export const StakedImageList = (props) => {
-  const mobile = useMediaQuery("(max-width:500px)");
+  const mobile = useMediaQuery("(max-:500px)");
   const clickHandler = (event, e) => {
     if (props.selectedUnstakeNFT.includes(e)) {
       props.setSelectedUnstakeNFT(props.selectedUnstakeNFT.filter((item) => item !== e));
