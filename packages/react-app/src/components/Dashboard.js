@@ -26,6 +26,7 @@ import WalletButton from './WalletButton';
 import StakedMutants from './StakedMutants/StakedMutants';
 import TotalRewards from './TotalRewards/TotalRewards';
 import DefaultSwap from './DefaultSwap';
+import Chart from './Chart/Chart';
 function Copyright(props) {
   return (
     <Typography variant="body2" color="text.secondary" align="center" {...props}>
@@ -64,6 +65,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     '& .MuiDrawer-paper': {
       position: 'relative',
       whiteSpace: 'nowrap',
+      height: '150vh',
       width: drawerWidth,
       backgroundColor: "#020202",
       transition: theme.transitions.create('width', {
@@ -167,8 +169,8 @@ function DashboardContent() {
           sx={{
             backgroundColor: (theme) => "#020202",
             flexGrow: 1,
-            height: '100vh',
-            overflow: 'auto',
+            height: '150vh',
+            overflow: 'hidden',
           }}
         >
           <Toolbar />
@@ -178,12 +180,13 @@ function DashboardContent() {
               alignItems="center" item xs={12}>
               <Routes>
                 <Route path="/" element={<DefaultSwap />} />
+                <Route path="chart" element={<Chart/>} />
                 <Route path="stake" element={<NftStaking />} />
                 <Route path="stake/dsdc" element={<><StakedNfts /> <TotalRewards plan={0} /> </>} />
                 <Route path="stake/dsdc-mutants" element={<><StakedMutants /> <TotalRewards plan={1} /> </>} />
               </Routes>
             </Grid>
-            <Copyright sx={{ position: "sticky", bottom: "-50px", left: "50%" }} />
+            <Copyright sx={{ position: "absolute", bottom: "-90px", left: "50%" }} />
           </Container>
         </Box>
       </Box>

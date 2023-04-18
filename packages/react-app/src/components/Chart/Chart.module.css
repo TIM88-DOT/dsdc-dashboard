@@ -1,0 +1,19 @@
+#dexscreener-embed {
+    width: 100%;
+    padding-bottom: 125%;
+}
+
+@media(min-width:1400px) {
+    #dexscreener-embed {
+        padding-bottom: 65%;
+    }
+}
+
+#dexscreener-embed iframe {
+    position: absolute;
+    width: 75%;
+    height: 90%;
+    top: 100px;
+    left: 20%;
+    border: 0;
+}

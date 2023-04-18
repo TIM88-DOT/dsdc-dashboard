@@ -6,6 +6,7 @@ import ListSubheader from '@mui/material/ListSubheader';
 import SwapVertIcon from '@mui/icons-material/SwapVert';
 import RocketLaunchIcon from '@mui/icons-material/RocketLaunch';
 import MonetizationOnIcon from '@mui/icons-material/MonetizationOn';
+import ShowChartIcon from '@mui/icons-material/ShowChart';
 import PublicIcon from '@mui/icons-material/Public';
 import DescriptionIcon from '@mui/icons-material/Description';
 import TelegramIcon from '@mui/icons-material/Telegram';
@@ -50,6 +51,14 @@ export const mainListItems = (
       </ListItemIcon>
       <ListItemText primary="TOKEN STAKING" />
     </ListItemButton>
+
+    <ListItemButton to={`chart`}>
+      <ListItemIcon>
+        <ShowChartIcon />
+      </ListItemIcon>
+      <ListItemText primary="CHART" />
+    </ListItemButton>
+
 
   </React.Fragment>
 );
