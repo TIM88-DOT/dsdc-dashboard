@@ -1,5 +1,5 @@
 #dexscreener-embed {
-    width: 100%;
+    width: 90%;
     padding-bottom: 125%;
 }
 
@@ -11,9 +11,9 @@
 
 #dexscreener-embed iframe {
     position: absolute;
-    width: 75%;
+    width: 80%;
     height: 90%;
     top: 100px;
-    left: 20%;
+    left: 16%;
     border: 0;
 }

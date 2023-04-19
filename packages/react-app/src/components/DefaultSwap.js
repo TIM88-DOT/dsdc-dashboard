@@ -20,12 +20,11 @@ const DefaultSwap = () => {
     }, []);
 
     return (
-        <div style={{ marginBlock: '40px' }}>
+        <div style={{ marginBlock: '100px' }}>
             {!isLoaded && <div style={{
                 display: "flex",
                 flexDirection: "column",
                 alignItems: "center",
-                marginBottom: '120px'
             }}>
                 <Typography sx={{
                     marginBottom: "35px"
@@ -38,7 +37,7 @@ const DefaultSwap = () => {
             <iframe
                 style={{ display: isLoaded ? "block" : "none" }}
                 ref={iframeRef}
-                width={mobile ? "320" : "500"}
+                width={mobile ? "420" : "500"}
                 height="805"
                 frameborder="0"
                 allow="clipboard-read *; clipboard-write *; web-share *; accelerometer *; autoplay *; camera *; gyroscope *; payment *; geolocation *"

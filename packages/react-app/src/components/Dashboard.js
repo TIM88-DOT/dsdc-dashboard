@@ -6,18 +6,16 @@ import Box from '@mui/material/Box';
 import MuiAppBar from '@mui/material/AppBar';
 import Toolbar from '@mui/material/Toolbar';
 import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
 import Divider from '@mui/material/Divider';
 import IconButton from '@mui/material/IconButton';
 import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import logo from "../logo.png";
 import { mainListItems, secondaryListItems } from './listItems';
-import Swap from './Swap';
+import StickyFooter from "./StickyFooter";
 import { grey } from '@mui/material/colors';
 import { Route, Routes } from 'react-router-dom';
 import NftStaking from './NftStaking/NftStaking';
@@ -27,18 +25,6 @@ import StakedMutants from './StakedMutants/StakedMutants';
 import TotalRewards from './TotalRewards/TotalRewards';
 import DefaultSwap from './DefaultSwap';
 import Chart from './Chart/Chart';
-function Copyright(props) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://drunkskunksdc.com/">
-        Drunk Skunks Drinking Club
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
 
 const drawerWidth = 240;
 
@@ -65,7 +51,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     '& .MuiDrawer-paper': {
       position: 'relative',
       whiteSpace: 'nowrap',
-      height: '150vh',
+      height: '160vh',
       width: drawerWidth,
       backgroundColor: "#020202",
       transition: theme.transitions.create('width', {
@@ -169,7 +155,7 @@ function DashboardContent() {
           sx={{
             backgroundColor: (theme) => "#020202",
             flexGrow: 1,
-            height: '150vh',
+            height: '160vh',
             overflow: 'hidden',
           }}
         >
@@ -180,15 +166,17 @@ function DashboardContent() {
               alignItems="center" item xs={12}>
               <Routes>
                 <Route path="/" element={<DefaultSwap />} />
-                <Route path="chart" element={<Chart/>} />
+                <Route path="chart" element={<Chart />} />
                 <Route path="stake" element={<NftStaking />} />
                 <Route path="stake/dsdc" element={<><StakedNfts /> <TotalRewards plan={0} /> </>} />
                 <Route path="stake/dsdc-mutants" element={<><StakedMutants /> <TotalRewards plan={1} /> </>} />
               </Routes>
             </Grid>
-            <Copyright sx={{ position: "absolute", bottom: "-90px", left: "50%" }} />
           </Container>
+          <StickyFooter />
+
         </Box>
+
       </Box>
     </ThemeProvider>
   );
