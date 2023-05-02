@@ -52,13 +52,14 @@ export const mainListItems = (
       <ListItemText primary="TOKEN STAKING" />
     </ListItemButton>
 
-    <ListItemButton to={`chart`}>
-      <ListItemIcon>
-        <ShowChartIcon />
-      </ListItemIcon>
-      <ListItemText primary="CHART" />
-    </ListItemButton>
-
+    <Link style={linkStyle} to={`chart`}>
+      <ListItemButton >
+        <ListItemIcon>
+          <ShowChartIcon />
+        </ListItemIcon>
+        <ListItemText primary="CHART" />
+      </ListItemButton>
+    </Link>
 
   </React.Fragment>
 );
