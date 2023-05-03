@@ -1,22 +1,21 @@
 import { StakedImageList } from "../StakedImageList/StakedImageList";
-import FormGroup from "@mui/material/FormGroup";
-import FormControlLabel from "@mui/material/FormControlLabel";
-import Switch from "@mui/material/Switch";
 import Box from "@mui/material/Box";
 import Modal from "@mui/material/Modal";
 import Fade from "@mui/material/Fade";
 import classes from "./StakedMutants.module.scss";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import { useState, useEffect, useContext } from "react";
-import { useCall, useEthers, useContractFunction } from "@usedapp/core";
-import { Contract } from "@ethersproject/contracts";
+import { useState, useEffect } from "react";
 import axios from "axios";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
 import { ButtonPrimary, ButtonSecondary } from "../index";
 import { ethers } from "ethers";
+import { useAccount, useSigner } from "wagmi";
 import { useGetIsApprovedForAll } from "../../hooks/useGetIsApprovedForAll";
 import { UnstakedImageList } from "../UnstakedImageList/UnstakedImageList";
+import useGetUserNFTs from "../../hooks/useGetUserNFTs";
+import useGetStakedNFTs from "../../hooks/useGetStakedNFTs";
+import setApprovalForAll from "../../functions/setApprovalForAll";
 
 export default function StakedMutants(props) {
   const [tokensOfOwner, setTokensOfOwner] = useState([]);
@@ -26,7 +25,8 @@ export default function StakedMutants(props) {
   const plan = 1;
   const [selectedStakeNFT, setSelectedStakeNFT] = useState([]);
   const [selectedUnstakeNFT, setSelectedUnstakeNFT] = useState([]);
-  const { account, library } = useEthers();
+  const { data: signer } = useSigner();
+  const { address } = useAccount();
   const [stakeLoading, setStakeLoading] = useState(false);
   const [unstakeLoading, setUnstakeLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -43,50 +43,27 @@ export default function StakedMutants(props) {
     padding: "15px",
   };
 
-  const mutantsContract = new Contract(addresses.mutants, abis.mutants);
+
+  const allUserNfts = useGetUserNFTs(true);
 
   const isApprovedForAll = useGetIsApprovedForAll(
     addresses.mutants,
     abis.mutants,
     addresses.staking,
-    account
+    address
   );
 
-  const { error: walletOfOwnerError, value: walletOfOwnerValue } =
-    useCall(
-      account && {
-        contract: new Contract(addresses.mutants, abis.mutants),
-        method: "tokensOfOwner",
-        args: [account],
-      }
-    ) ?? {};
 
-  if (walletOfOwnerError) {
-    console.log(walletOfOwnerError);
-  }
-
-  const { error: stakedNftsError, value: stakedNftsValue } =
-    useCall(
-      account && {
-        contract: new Contract(addresses.staking, abis.staking),
-        method: "getStakedTokens",
-        args: [plan, account],
-      }
-    ) ?? {};
-
-  if (stakedNftsError) {
-    console.log(stakedNftsError);
-  }
-
-  const { state: setApprovalForAllState, send: setApprovalForAll } =
-    useContractFunction(mutantsContract, "setApprovalForAll", {
-      transactionName: "setApprovalForAll",
-    });
+  const stakedNfts = useGetStakedNFTs(plan);
 
   const handleClose = () => setOpen(false);
 
   const approveMaxDsdc = async () => {
-    await setApprovalForAll(addresses.staking, 1);
+    try {
+      await setApprovalForAll(true)
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   async function getNftsData(userNfts) {
@@ -109,7 +86,7 @@ export default function StakedMutants(props) {
   }
 
   const onPickClick = async () => {
-    if (account) {
+    if (address && allUserNfts.length) {
       setStakeLoading(true);
       if (isApprovedForAll === undefined) {
         setLoading(true);
@@ -117,8 +94,7 @@ export default function StakedMutants(props) {
         setOpen(true);
         setLoading(true);
         setSelectedUnstakeNFT([]);
-        const allNfts = walletOfOwnerValue?.[0].map((e) => Number(e));
-        const tokensOfOwner = await getNftsData(allNfts);
+        const tokensOfOwner = await getNftsData(allUserNfts);
         setUnstakedTokensOfOwner(tokensOfOwner);
         setLoading(false);
       }
@@ -127,7 +103,6 @@ export default function StakedMutants(props) {
   };
 
   const onStake = async () => {
-    const signer = library.getSigner();
     const dsdcStakingContract = new ethers.Contract(
       addresses.staking,
       abis.staking,
@@ -145,7 +120,6 @@ export default function StakedMutants(props) {
   };
 
   const onUnstake = async () => {
-    const signer = library.getSigner();
     const dsdcStakingContract = new ethers.Contract(
       addresses.staking,
       abis.staking,
@@ -178,8 +152,7 @@ export default function StakedMutants(props) {
   };
 
   useEffect(() => {
-    if (account) {
-      const stakedNfts = stakedNftsValue?.[0].map((e) => Number(e));
+    if (address) {
       console.log("staked nfts", stakedNfts);
       getData(stakedNfts);
     }
@@ -188,12 +161,12 @@ export default function StakedMutants(props) {
       const tokenData = await getNftsData(stakedNfts);
       setTokensOfOwner(tokenData);
     }
-  }, [account, stakedNftsValue]);
+  }, [address, stakedNfts]);
 
   return (
     <div className={classes.container}>
       <h2>YOUR STAKED MUTANT(S)</h2>
-      {stakedNftsValue?.[0].length > 0 ? (
+      {stakedNfts.length > 0 ? (
         loading ? (
           <div className={classes.loading}>
             <Typography

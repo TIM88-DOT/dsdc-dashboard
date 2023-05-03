@@ -1,5 +1,4 @@
-import { Contract } from "@ethersproject/contracts";
-import { useCall } from "@usedapp/core";
+import { useContractRead } from 'wagmi'
 
 export function useGetIsApprovedForAll(
   contractAddress,
@@ -7,19 +6,18 @@ export function useGetIsApprovedForAll(
   stakingAddress,
   address
 ) {
-  const { value, error } =
-    useCall(
-      address &&
-        contractAddress && {
-          contract: new Contract(contractAddress, contractAbi), // instance of called contract
-          method: "isApprovedForAll", // Method to be called
-          args: [address, stakingAddress], // Method arguments - address to be checked for balance
-        }
-    ) ?? {};
-  if (error) {
-    console.error(error.message);
+
+  const { data, isError, isLoading } = useContractRead({
+    address: contractAddress,
+    abi: contractAbi,
+    functionName: 'isApprovedForAll',
+    args: [address, stakingAddress],
+    watch: true
+  })
+  if (isError) {
+    console.error("error getting isApprovedForAll");
     return undefined;
   }
-  
-  return value?.[0];
+
+  return data;
 }

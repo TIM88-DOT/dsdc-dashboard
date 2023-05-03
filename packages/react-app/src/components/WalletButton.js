@@ -1,84 +1,51 @@
 import { Button } from "../components";
-import { BSC, shortenAddress, useEthers, useLookupAddress } from "@usedapp/core";
 import React, { useEffect, useState } from "react";
-import Web3Modal from "web3modal";
-import WalletConnectProvider from "@walletconnect/web3-provider";
+
+import { useWeb3Modal } from "@web3modal/react";
+
+import { useAccount, useDisconnect, useEnsName, useNetwork, useSwitchNetwork } from "wagmi";
+
+import getWalletShort from '../helpers/getWalletShort';
 
 export default function WalletButton() {
-  const [rendered, setRendered] = useState("");
 
-  const { ens } = useLookupAddress();
-  const { account, activate, deactivate, switchNetwork, error, chainId } = useEthers();
+  const { open } = useWeb3Modal();
+  const { isConnected, address } = useAccount();
+  const { data: ensName } = useEnsName({ address })
+  const { disconnect } = useDisconnect()
 
-  const activateProvider = async () => {
-    const providerOptions = {
-      injected: {
-        display: {
-          name: "Metamask",
-          description: "Connect with the provider in your Browser",
-        },
-        package: null,
-      },
-      walletconnect: {
-        package: WalletConnectProvider,
-        options: {
-          chainId: 56,
-          rpc: {
-            56: "https://bsc-dataseed.binance.org",
-          },
-        },
-      },
-    };
+  const { chain } = useNetwork()
+	const { chains, error, isLoading, pendingChainId, switchNetwork } =
+		useSwitchNetwork()
 
-    const web3Modal = new Web3Modal({
-      providerOptions,
-    });
-    try {
-      const provider = await web3Modal.connect();
-      await activate(provider);
 
-    } catch (error) {
-      console.error(error);
+  const label = (address !== '' && address !== undefined) ? (ensName ?? getWalletShort(address)) : "CONNECT WALLET";
+
+
+  const onConnectClick = async () => {
+    if (!isConnected) {
+      open();
+    } else {
+      disconnect();
     }
+
   };
 
-  useEffect(() => {
-    if (ens) {
-      setRendered(ens);
-    } else if (account) {
-      setRendered(shortenAddress(account));
-    } else {
-      setRendered("");
-    }
-  }, [account, ens, setRendered]);
 
-  useEffect(() => {
-    if (error) {
-      console.error("Error while connecting wallet:", error.message);
-    }
-  }, [error]);
-
-  useEffect(() => {
-    if (chainId !== BSC.chainId) {
-      switchNetwork(BSC.chainId)
-    }
-    if (error) {
-      console.error("Error while connecting wallet:", error.message);
-    }
-  }, [chainId, error, switchNetwork]);
+	useEffect(() => {
+		if (chain?.id !== chains[0]?.id) {
+			switchNetwork?.(chains[0]?.id)
+		}
+		if (error) {
+			console.error("Error while connecting wallet:", error.message);
+		}
+	}, [chain, chains, error, switchNetwork]);
 
   return (
     <Button
-      onClick={() => {
-        if (!account) {
-          activateProvider();
-        } else {
-          deactivate();
-        }
-      }}
+      onClick={onConnectClick()}
     >
-      {rendered === "" && "Connect Wallet"}
-      {rendered !== "" && rendered}
+      {isLoading && pendingChainId === chains[0]?.id ? 'SWITCHING NETWORK...' : label}
     </Button>
   );
 }

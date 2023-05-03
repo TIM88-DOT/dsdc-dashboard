@@ -5,9 +5,8 @@ import Fade from "@mui/material/Fade";
 import classes from "./StakedNfts.module.scss";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import { useState, useEffect, useContext } from "react";
-import { useCall, useEthers, useContractFunction } from "@usedapp/core";
-import { Contract } from "@ethersproject/contracts";
+import { useState} from "react";
+import { useAccount, useSigner } from "wagmi";
 import axios from "axios";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
 import { ButtonPrimary, ButtonSecondary } from "../index";
@@ -17,16 +16,17 @@ import { UnstakedImageList } from "../UnstakedImageList/UnstakedImageList";
 
 import useGetUserNFTs from "../../hooks/useGetUserNFTs";
 import useGetStakedNFTs from "../../hooks/useGetStakedNFTs";
+import setApprovalForAll from "../../functions/setApprovalForAll";
 
 export default function StakedNfts(props) {
-  const [tokensOfOwner, setTokensOfOwner] = useState([]);
   const [unstakedTokensOfOwner, setUnstakedTokensOfOwner] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
   const plan = 0;
   const [selectedStakeNFT, setSelectedStakeNFT] = useState([]);
   const [selectedUnstakeNFT, setSelectedUnstakeNFT] = useState([]);
-  const { account, chainId, library } = useEthers();
+  const { data: signer } = useSigner();
+  const { address } = useAccount();
   const [stakeLoading, setStakeLoading] = useState(false);
   const [unstakeLoading, setUnstakeLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
@@ -43,13 +43,11 @@ export default function StakedNfts(props) {
     padding: "15px",
   };
 
-  const dsdcContract = new Contract(addresses.dsdc, abis.dsdc);
-
   const isApprovedForAll = useGetIsApprovedForAll(
     addresses.dsdc,
     abis.dsdc,
     addresses.staking,
-    account
+    address
   );
 
  const walletOfOwnerValue = useGetUserNFTs();
@@ -58,15 +56,14 @@ export default function StakedNfts(props) {
   const stakedNftsValue = useGetStakedNFTs(plan);
   console.log("users staked nfts", stakedNftsValue); 
  
-  const { state: setApprovalForAllState, send: setApprovalForAll } =
-    useContractFunction(dsdcContract, "setApprovalForAll", {
-      transactionName: "setApprovalForAll",
-    });
-
   const handleClose = () => setOpen(false);
 
   const approveMaxDsdc = async () => {
-    await setApprovalForAll(addresses.staking, 1);
+    try {
+      await setApprovalForAll(false)
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   async function getNftsData(userNfts) {
@@ -89,7 +86,7 @@ export default function StakedNfts(props) {
   }
 
   const onPickClick = async () => {
-    if (account) {
+    if (address) {
       setStakeLoading(true);
       if (isApprovedForAll === undefined) {
         setLoading(true);
@@ -106,7 +103,6 @@ export default function StakedNfts(props) {
   };
 
   const onStake = async () => {
-    const signer = library.getSigner();
     const dsdcStakingContract = new ethers.Contract(
       addresses.staking,
       abis.staking,
@@ -124,7 +120,6 @@ export default function StakedNfts(props) {
   };
 
   const onUnstake = async () => {
-    const signer = library.getSigner();
     const dsdcStakingContract = new ethers.Contract(
       addresses.staking,
       abis.staking,

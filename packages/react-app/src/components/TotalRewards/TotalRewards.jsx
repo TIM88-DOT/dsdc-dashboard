@@ -2,22 +2,22 @@ import classes from "./TotalRewards.module.scss";
 import { ButtonPrimary } from "../index";
 import Typography from "@mui/material/Typography";
 import CircularProgress from "@mui/material/CircularProgress";
-import { useEthers } from "@usedapp/core";
+import { useAccount, useSigner } from "wagmi";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
 import { ethers } from "ethers";
 import useGetTotalRewards from "../../hooks/useGetTotalRewards";
 import { useState } from "react";
 
 export default function TotalRewards(props) {
-  const { account, library } = useEthers();
+  const { data: signer } = useSigner();
+  const { address } = useAccount();
   const [loading, setLoading] = useState(false);
   const plan = props.plan;
   const totalRewardsValue = useGetTotalRewards(plan);
   //console.log("totalRewards", totalRewardsValue);
 
   const onClaim = async () => {
-    if (account) {
-      const signer = library.getSigner();
+    if (address) {
       const mutantsStakingContract = new ethers.Contract(
         addresses.staking,
         abis.staking,
@@ -37,7 +37,7 @@ export default function TotalRewards(props) {
   return (
     <div className={classes["prize-container"]}>
       <h2 style={{ padding: "0.7rem" }}>YOUR REWARDS</h2>
-      {account ? (
+      {address ? (
         <div>
           <Typography
             sx={{ textAlign: "center", fontSize: "16px" }}

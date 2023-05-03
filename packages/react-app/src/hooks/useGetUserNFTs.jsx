@@ -1,22 +1,29 @@
 import { useState, useEffect } from 'react';
 import { ethers } from 'ethers';
 import { addresses, abis } from "@uniswap-v2-app/contracts";
-import { useEthers } from "@usedapp/core";
+import { useAccount } from "wagmi";
 
 const useGetUserNFTs = (mutants) => {
   const [ids, setIds] = useState([]);
-  const { account } = useEthers();
+  const { address } = useAccount();
   useEffect(() => {
     const fetchIds = async () => {
+      let contract = null
+      let ids = [];
       try {
         const provider = new ethers.providers.JsonRpcProvider(
-          "https://bsc-dataseed.binance.org"
+          "https://data-seed-prebsc-1-s2.binance.org:8545"
         );
-        let contract = new ethers.Contract(addresses.dsdc, abis.dsdc, provider);
+
         if (mutants) {
           contract = new ethers.Contract(addresses.mutants, abis.mutants, provider);
+          //ids = await contract.tokensOfOwner(address);
+          ids = await contract.walletOfOwner(address);
+        } else {
+          contract = new ethers.Contract(addresses.dsdc, abis.dsdc, provider);
+          ids = await contract.walletOfOwner(address);
         }
-        const ids = await contract.walletOfOwner(account);
+
         setIds(ids);
       } catch (error) {
         console.error(error);
@@ -24,7 +31,7 @@ const useGetUserNFTs = (mutants) => {
     };
 
     fetchIds();
-  }, [account, mutants]);
+  }, [address, mutants]);
 
   return ids.map(e => e.toString());
 };
