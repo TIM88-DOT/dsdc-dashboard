@@ -51,7 +51,7 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
     '& .MuiDrawer-paper': {
       position: 'relative',
       whiteSpace: 'nowrap',
-      height: '160vh',
+      height: '100vh',
       width: drawerWidth,
       backgroundColor: "#020202",
       transition: theme.transitions.create('width', {
@@ -85,11 +85,16 @@ const mdTheme = createTheme({
       primary: '#fff',
       secondary: grey[500],
     },
+    
   },
   typography: {
     fontFamily: "Montserrat, sans-serif",
+    fontSize: 12, // Set the font size to 10
   },
+  spacing: (factor) => `${0.25 * factor}rem`,
 });
+
+mdTheme.spacing(2);
 
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
@@ -155,8 +160,8 @@ function DashboardContent() {
           sx={{
             backgroundColor: (theme) => "#020202",
             flexGrow: 1,
-            height: '160vh',
-            overflow: 'hidden',
+            height: '100vh',
+            overflow: 'auto',
           }}
         >
           <Toolbar />

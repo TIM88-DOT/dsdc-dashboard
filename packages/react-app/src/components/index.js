@@ -16,10 +16,10 @@ export const Button = styled.button`
   border-radius: 8px;
   color: #000;
   cursor: pointer;
-  font-size: 16px;
+  font-size: 12px;
   margin: 0px 5px;
   font-weight: bold;
-  padding: 12px 24px;
+  padding: 9px 18px;
   text-align: center;
   text-decoration: none;
   position: absolute;

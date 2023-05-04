@@ -19,6 +19,7 @@ function App() {
     provider
   })
   const ethereumClient = new EthereumClient(wagmiClient, chains)
+  
   return (
     <>
       <WagmiConfig client={wagmiClient}>
@@ -26,9 +27,9 @@ function App() {
           <Dashboard />
         </Container>
         <Web3Modal themeVariables={{
-          '--w3m-background-color': '#bfc500',
-          '--w3m-accent-color': '#bfc500'
-        }} projectId={projectId} ethereumClient={ethereumClient} />
+            '--w3m-background-color': '#bfc500',
+            '--w3m-accent-color': '#bfc500'
+          }} projectId={projectId} ethereumClient={ethereumClient} />
       </WagmiConfig>
     </>
   );

@@ -15,8 +15,8 @@ export default function WalletButton() {
   const { disconnect } = useDisconnect()
 
   const { chain } = useNetwork()
-	const { chains, error, isLoading, pendingChainId, switchNetwork } =
-		useSwitchNetwork()
+  const { chains, error, isLoading, pendingChainId, switchNetwork } =
+    useSwitchNetwork()
 
 
   const label = (address !== '' && address !== undefined) ? (ensName ?? getWalletShort(address)) : "CONNECT WALLET";
@@ -32,18 +32,18 @@ export default function WalletButton() {
   };
 
 
-	useEffect(() => {
-		if (chain?.id !== chains[0]?.id) {
-			switchNetwork?.(chains[0]?.id)
-		}
-		if (error) {
-			console.error("Error while connecting wallet:", error.message);
-		}
-	}, [chain, chains, error, switchNetwork]);
+  useEffect(() => {
+    if (chain?.id !== chains[0]?.id) {
+      switchNetwork?.(chains[0]?.id)
+    }
+    if (error) {
+      console.error("Error while connecting wallet:", error.message);
+    }
+  }, [chain, chains, error, switchNetwork]);
 
   return (
     <Button
-      onClick={onConnectClick()}
+      onClick={() => onConnectClick()}
     >
       {isLoading && pendingChainId === chains[0]?.id ? 'SWITCHING NETWORK...' : label}
     </Button>

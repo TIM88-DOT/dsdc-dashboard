@@ -14,12 +14,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Link } from "react-router-dom";
 
 const linkStyle = {
-  margin: " 0",
-  fontFamily: "Montserrat, sans-serif",
-  fontWeight: "400",
-  fontSize: "1rem",
-  lineHeight: "1.5",
-  display: "block",
   color: "#fff",
   textDecoration: "none"
 }

@@ -24,19 +24,24 @@ export default function StickyFooter() {
         <Box
             component="footer"
             sx={{
-                py: 3,
+                py: 2,
                 px: 2,
                 mt: 'auto',
                 backgroundColor: (theme) => "#020202",
                 position: "absolute",
-                bottom: "-175px",
-                left: "25%",
-                width: "70%"
+                bottom: 0,
+                left: 0,
+                right: 0,
+                mx: "auto",
+                width: "100px",
+                whiteSpace: "nowrap",
+                zIndex: 1
+
             }}
         >
             <Container maxWidth="sm">
                 <Copyright />
             </Container>
-        </Box>
+        </Box >
     );
 }
