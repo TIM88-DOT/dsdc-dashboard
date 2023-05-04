@@ -178,7 +178,6 @@ function DashboardContent() {
               </Routes>
             </Grid>
           </Container>
-          <StickyFooter />
 
         </Box>
 

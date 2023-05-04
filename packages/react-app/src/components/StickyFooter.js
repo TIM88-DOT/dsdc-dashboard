@@ -30,10 +30,9 @@ export default function StickyFooter() {
                 backgroundColor: (theme) => "#020202",
                 position: "absolute",
                 bottom: 0,
-                left: 0,
-                right: 0,
+                left: "40%",
                 mx: "auto",
-                width: "100px",
+                width: "50%",
                 whiteSpace: "nowrap",
                 zIndex: 1
 
