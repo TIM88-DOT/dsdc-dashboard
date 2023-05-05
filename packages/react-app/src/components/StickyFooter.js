@@ -28,14 +28,11 @@ export default function StickyFooter() {
                 px: 2,
                 mt: 'auto',
                 backgroundColor: (theme) => "#020202",
-                position: "absolute",
-                bottom: 0,
-                left: "40%",
                 mx: "auto",
-                width: "50%",
+                width: "100%",
+                textAlign: "center",
                 whiteSpace: "nowrap",
-                zIndex: 1
-
+                zIndex: 1,
             }}
         >
             <Container maxWidth="sm">

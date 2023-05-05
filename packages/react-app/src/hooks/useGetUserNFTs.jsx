@@ -3,7 +3,7 @@ import { ethers } from 'ethers';
 import { addresses, abis } from "@uniswap-v2-app/contracts";
 import { useAccount } from "wagmi";
 
-const useGetUserNFTs = (mutants) => {
+const useGetUserNFTs = (plan) => {
   const [ids, setIds] = useState([]);
   const { address } = useAccount();
   useEffect(() => {
@@ -15,12 +15,16 @@ const useGetUserNFTs = (mutants) => {
           "https://data-seed-prebsc-1-s2.binance.org:8545"
         );
 
-        if (mutants) {
+        if (plan === 1) {
           contract = new ethers.Contract(addresses.mutants, abis.mutants, provider);
           //ids = await contract.tokensOfOwner(address);
           ids = await contract.walletOfOwner(address);
-        } else {
+        } else if(plan === 0) {
           contract = new ethers.Contract(addresses.dsdc, abis.dsdc, provider);
+          ids = await contract.walletOfOwner(address);
+        } else {
+          // replace for stoners
+          contract = new ethers.Contract(addresses.mutants, abis.mutants, provider);
           ids = await contract.walletOfOwner(address);
         }
 
@@ -31,7 +35,7 @@ const useGetUserNFTs = (mutants) => {
     };
 
     fetchIds();
-  }, [address, mutants]);
+  }, [address]);
 
   return ids.map(e => e.toString());
 };

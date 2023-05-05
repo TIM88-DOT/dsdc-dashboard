@@ -85,7 +85,7 @@ const mdTheme = createTheme({
       primary: '#fff',
       secondary: grey[500],
     },
-    
+
   },
   typography: {
     fontFamily: "Montserrat, sans-serif",
@@ -173,15 +173,16 @@ function DashboardContent() {
                 <Route path="/" element={<DefaultSwap />} />
                 <Route path="chart" element={<Chart />} />
                 <Route path="stake" element={<NftStaking />} />
-                <Route path="stake/dsdc" element={<><StakedNfts /> <TotalRewards plan={0} /> </>} />
-                <Route path="stake/dsdc-mutants" element={<><StakedMutants /> <TotalRewards plan={1} /> </>} />
+                <Route path="stake/dsdc" element={<><StakedNfts plan={0} /> <TotalRewards plan={0} /> </>} />
+                <Route path="stake/dsdc-mutants" element={<><StakedNfts plan={1}  /> <TotalRewards plan={1} /> </>} />
               </Routes>
             </Grid>
           </Container>
 
         </Box>
-
       </Box>
+
+
     </ThemeProvider>
   );
 }

@@ -45,7 +45,6 @@ export default function StakedMutants(props) {
 
 
   const allUserNfts = useGetUserNFTs(true);
-
   const isApprovedForAll = useGetIsApprovedForAll(
     addresses.mutants,
     abis.mutants,
@@ -68,15 +67,19 @@ export default function StakedMutants(props) {
 
   async function getNftsData(userNfts) {
     const tokenData = [];
+
     for (var j = 0; j < userNfts?.length; j++) {
+      console.log("userNfts[j]", userNfts[j]);
+
       const mutantsMetaData = await axios.get(
         `https://drunkskunksdc.mypinata.cloud/ipfs/QmadV6pf2fzgmo3NDbx5fuyxNZUcTaNiGSKbNx3FoWkgAG/${userNfts[j]}.json`
       );
+
       const nftTokenData = {
         img: `https://drunkskunksdc.mypinata.cloud/ipfs/${mutantsMetaData.data.image.slice(
           7
         )}`,
-        title: mutantsMetaData.data.name,
+        title: `DSDC Mutant #${userNfts[j]}`,
         tokenId: userNfts[j],
       };
       tokenData.push(nftTokenData);
@@ -154,12 +157,7 @@ export default function StakedMutants(props) {
   useEffect(() => {
     if (address) {
       console.log("staked nfts", stakedNfts);
-      getData(stakedNfts);
-    }
-
-    async function getData(stakedNfts) {
-      const tokenData = await getNftsData(stakedNfts);
-      setTokensOfOwner(tokenData);
+      setTokensOfOwner(stakedNfts);
     }
   }, [address, stakedNfts]);
 

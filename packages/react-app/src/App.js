@@ -6,7 +6,7 @@ import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
 import { bscTestnet } from 'wagmi/chains'
 
-
+import StickyFooter from './components/StickyFooter'
 
 function App() {
   const chains = [bscTestnet]
@@ -25,7 +25,10 @@ function App() {
       <WagmiConfig client={wagmiClient}>
         <Container>
           <Dashboard />
+        {/* <StickyFooter /> */}
+
         </Container>
+
         <Web3Modal themeVariables={{
             '--w3m-background-color': '#bfc500',
             '--w3m-accent-color': '#bfc500'

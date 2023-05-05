@@ -5,9 +5,8 @@ import Fade from "@mui/material/Fade";
 import classes from "./StakedNfts.module.scss";
 import CircularProgress from "@mui/material/CircularProgress";
 import Typography from "@mui/material/Typography";
-import { useState} from "react";
+import { useState, useEffect } from "react";
 import { useAccount, useSigner } from "wagmi";
-import axios from "axios";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
 import { ButtonPrimary, ButtonSecondary } from "../index";
 import { ethers } from "ethers";
@@ -17,12 +16,14 @@ import { UnstakedImageList } from "../UnstakedImageList/UnstakedImageList";
 import useGetUserNFTs from "../../hooks/useGetUserNFTs";
 import useGetStakedNFTs from "../../hooks/useGetStakedNFTs";
 import setApprovalForAll from "../../functions/setApprovalForAll";
+import getNftsData from "../../helpers/getNftsData";
+import getTitle from "../../helpers/getTitle";
 
 export default function StakedNfts(props) {
   const [unstakedTokensOfOwner, setUnstakedTokensOfOwner] = useState([]);
   const [loading, setLoading] = useState(false);
   const [open, setOpen] = useState(false);
-  const plan = 0;
+
   const [selectedStakeNFT, setSelectedStakeNFT] = useState([]);
   const [selectedUnstakeNFT, setSelectedUnstakeNFT] = useState([]);
   const { data: signer } = useSigner();
@@ -30,6 +31,8 @@ export default function StakedNfts(props) {
   const [stakeLoading, setStakeLoading] = useState(false);
   const [unstakeLoading, setUnstakeLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+
+  const title = getTitle(props.plan);
 
   const style = {
     position: "absolute",
@@ -44,46 +47,30 @@ export default function StakedNfts(props) {
   };
 
   const isApprovedForAll = useGetIsApprovedForAll(
-    addresses.dsdc,
-    abis.dsdc,
-    addresses.staking,
+    props.plan,
     address
   );
 
- const walletOfOwnerValue = useGetUserNFTs();
-  console.log("users nfts", walletOfOwnerValue); 
-  
-  const stakedNftsValue = useGetStakedNFTs(plan);
-  console.log("users staked nfts", stakedNftsValue); 
- 
+  const walletOfOwnerValue = useGetUserNFTs(props.plan);
+
+  const { isLoading, stakedNftsValue } = useGetStakedNFTs(props.plan);
+  console.log("users staked nfts", stakedNftsValue);
+  console.log("isLoading", isLoading);
+
+  useEffect(() => {
+    console.log("selectedUnstakeNFT changed:", selectedUnstakeNFT);
+    // perform any actions that need to happen when the state changes here
+  }, [selectedUnstakeNFT]);
   const handleClose = () => setOpen(false);
 
   const approveMaxDsdc = async () => {
     try {
-      await setApprovalForAll(false)
+      await setApprovalForAll(props.plan)
     } catch (error) {
       console.error(error);
     }
   };
 
-  async function getNftsData(userNfts) {
-    const tokenData = [];
-    for (var j = 0; j < userNfts?.length; j++) {
-      const dsdcMetaData = await axios.get(
-        `https://bafybeigmbv6qevyposswcncodvket6bl34chc4j6326akxg2xj6arkmfwu.ipfs.nftstorage.link/${userNfts[j]}.json`
-      );
-      const nftTokenData = {
-        img: `https://drunkskunksdc.mypinata.cloud/ipfs/${dsdcMetaData.data.image.slice(
-          7
-        )}`,
-        title: dsdcMetaData.data.name,
-        tokenId: userNfts[j],
-      };
-      tokenData.push(nftTokenData);
-    }
-
-    return tokenData;
-  }
 
   const onPickClick = async () => {
     if (address) {
@@ -94,7 +81,7 @@ export default function StakedNfts(props) {
         setOpen(true);
         setLoading(true);
         setSelectedUnstakeNFT([]);
-        const tokensOfOwner = await getNftsData(walletOfOwnerValue);
+        const tokensOfOwner = await getNftsData(props.plan, walletOfOwnerValue);
         setUnstakedTokensOfOwner(tokensOfOwner);
         setLoading(false);
       }
@@ -110,9 +97,10 @@ export default function StakedNfts(props) {
     );
     if (selectedStakeNFT.length > 0) {
       try {
-        console.log("plan", plan);
+        console.log("props.plan", props.plan);
         console.log("selected Stake NFT", selectedStakeNFT);
-        await dsdcStakingContract.stake(plan, selectedStakeNFT);
+        const tx = await dsdcStakingContract.stake(props.plan, selectedStakeNFT);
+        await tx.wait()
       } catch (error) {
         console.log(error);
       }
@@ -128,7 +116,10 @@ export default function StakedNfts(props) {
     if (selectedUnstakeNFT.length > 0) {
       setUnstakeLoading(true);
       try {
-        await dsdcStakingContract.unstake(plan, selectedUnstakeNFT);
+        console.log("selectedUnstakeNFT", selectedUnstakeNFT);
+        const tx = await dsdcStakingContract.unstake(props.plan, selectedUnstakeNFT);
+        await tx.wait();
+        setSelectedUnstakeNFT([]);
         setUnstakeLoading(false);
       } catch (error) {
         console.log(error);
@@ -151,44 +142,34 @@ export default function StakedNfts(props) {
     setOpen(false);
   };
 
-  // useEffect(() => {
-  //   if (account && stakedNftsValue) {
-  //     getData(stakedNftsValue);
-  //   }
 
-  //   async function getData(stakedNfts) {
-  //     const tokenData = await getNftsData(stakedNfts);
-  //     setTokensOfOwner(tokenData);
-  //   }
-  // }, [account]);
-
-  
 
   return (
     <div className={classes.container}>
-      <h2>YOUR STAKED DSDC(S)</h2>
-      {stakedNftsValue?.length > 0 ? (
-        loading ? (
-          <div className={classes.loading}>
-            <Typography
-              sx={{ marginBottom: "35px" }}
-              variant="h6"
-              component="h4"
-            >
-              Fetching your staked DSDC...
-            </Typography>
-            <CircularProgress color="warning" />
-          </div>
+      <h2>{"YOUR STAKED " + title}</h2>
+      {isLoading ? (
+        <div className={classes.loading}>
+          <Typography
+            sx={{ marginBottom: "35px" }}
+            variant="h6"
+            component="h4"
+          >
+            {"Fetching your staked " + title + '...'}
+          </Typography>
+          <CircularProgress color="warning" />
+        </div>
+      ) :
+        stakedNftsValue?.length > 0 ? (
+          (
+            <StakedImageList
+              selectedUnstakeNFT={selectedUnstakeNFT}
+              setSelectedUnstakeNFT={setSelectedUnstakeNFT}
+              itemData={stakedNftsValue}
+            />
+          )
         ) : (
-          <StakedImageList
-            selectedUnstakeNFT={selectedUnstakeNFT}
-            setSelectedUnstakeNFT={setSelectedUnstakeNFT}
-            itemData={stakedNftsValue}
-          />
-        )
-      ) : (
-        <p>Nothing to show</p>
-      )}
+          <p>Nothing to show</p>
+        )}
       <div className={classes.actions}>
         <ButtonPrimary onClick={onPickClick}>
           {stakeLoading ? <CircularProgress size='1.5rem' color="warning" /> : "STAKE"}
@@ -207,7 +188,7 @@ export default function StakedNfts(props) {
         <Fade in={open}>
           <Box sx={style}>
             <Typography id="modal-modal-title" variant="h6" component="h2">
-              SELECT YOUR DSDC TO STAKE:
+              {"SELECT YOUR " + title + " TO STAKE :"}
             </Typography>
 
             <UnstakedImageList
