@@ -58,8 +58,6 @@ export default function StakedNfts(props) {
   console.log("isLoading", isLoading);
 
   useEffect(() => {
-    console.log("selectedUnstakeNFT changed:", selectedUnstakeNFT);
-    // perform any actions that need to happen when the state changes here
   }, [selectedUnstakeNFT]);
   const handleClose = () => setOpen(false);
 
@@ -147,7 +145,7 @@ export default function StakedNfts(props) {
   return (
     <div className={classes.container}>
       <h2>{"YOUR STAKED " + title}</h2>
-      {isLoading ? (
+      {address && isLoading ? (
         <div className={classes.loading}>
           <Typography
             sx={{ marginBottom: "35px" }}

@@ -44,7 +44,7 @@ export default function TotalRewards(props) {
             variant="h6"
             component="h6"
           >
-            TOTAL REWARDS :
+            $STINKY EARNINGS :
           </Typography>
 
           <Typography variant="h6" component="h6" sx={{ color: "#7b9c13" }}>

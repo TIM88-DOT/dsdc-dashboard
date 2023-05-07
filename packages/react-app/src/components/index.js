@@ -71,7 +71,9 @@ text-transform: uppercase;
   font-size: 14px;
   border: 1px solid #fff;
   :hover{
-    color: #fff;
+    background: #fff;
+    color: #000;
+    border: 1px solid #000;
     box-shadow: 0 5px 15px #fff;
   }
 `;

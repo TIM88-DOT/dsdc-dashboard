@@ -15,13 +15,11 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import logo from "../logo.png";
 import { mainListItems, secondaryListItems } from './listItems';
-import StickyFooter from "./StickyFooter";
 import { grey } from '@mui/material/colors';
 import { Route, Routes } from 'react-router-dom';
 import NftStaking from './NftStaking/NftStaking';
 import StakedNfts from './StakedNfts/StakedNfts';
 import WalletButton from './WalletButton';
-import StakedMutants from './StakedMutants/StakedMutants';
 import TotalRewards from './TotalRewards/TotalRewards';
 import DefaultSwap from './DefaultSwap';
 import Chart from './Chart/Chart';
@@ -173,8 +171,36 @@ function DashboardContent() {
                 <Route path="/" element={<DefaultSwap />} />
                 <Route path="chart" element={<Chart />} />
                 <Route path="stake" element={<NftStaking />} />
-                <Route path="stake/dsdc" element={<><StakedNfts plan={0} /> <TotalRewards plan={0} /> </>} />
-                <Route path="stake/dsdc-mutants" element={<><StakedNfts plan={1}  /> <TotalRewards plan={1} /> </>} />
+                <Route path="stake/dsdc" element={
+                  <>
+                    <Grid container
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="center">
+                      <StakedNfts plan={0} />
+                      <TotalRewards plan={0} />
+                    </Grid>
+                  </>} />
+                <Route path="stake/dsdc-mutants" element={
+                  <>
+                    <Grid container
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="center">
+                      <StakedNfts plan={1} />
+                      <TotalRewards plan={1} />
+                    </Grid>
+                  </>} />
+                <Route path="stake/ssss" element={
+                  <>
+                    <Grid container
+                      direction="column"
+                      justifyContent="center"
+                      alignItems="center">
+                      <StakedNfts plan={2} />
+                      <TotalRewards plan={2} />
+                    </Grid>
+                  </>} />
               </Routes>
             </Grid>
           </Container>

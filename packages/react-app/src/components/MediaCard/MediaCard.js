@@ -5,15 +5,45 @@ import CardContent from '@mui/material/CardContent';
 import CardMedia from '@mui/material/CardMedia';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import logo from "../../assets/images/logo.jpg";
+import ogLogo from "../../assets/images/logo.jpg";
 import mutantLogo from "../../assets/images/mutants-logo.png";
+import stonersLogo from "../../assets/images/stoned.png";
 import { Link } from "react-router-dom";
 import classes from "./MediaCard.module.css"
 import { ButtonPrimary } from '..';
 
 export default function MediaCard(props) {
-  const defaultClass = props.mutants ? "card--mutant" : "card"
-  const uri = props.mutants ? `dsdc-mutants` : `dsdc`
+  let defaultClass;
+  let uri;
+  let logo;
+  let title; 
+  let descriptionOne;
+  switch (props.plan) {
+    case 0:
+      defaultClass = "card";
+      uri = "dsdc";
+      logo = ogLogo;
+      title = "DSDC Staking";
+      descriptionOne = "lower APR"
+      break;
+    case 1:
+      defaultClass = "card--mutant";
+      uri = "dsdc-mutants"
+      logo = mutantLogo;
+      title = "Mutants Staking";
+      descriptionOne = "Higher APR"
+      break;
+    case 2:
+      uri = "ssss"
+      logo = stonersLogo;
+      title = "SSSS Staking";
+      defaultClass = "card";
+      descriptionOne = "Higher APR"
+      break;
+    default:
+      defaultClass = "card"
+      break;
+  }
   const linkStyle = {
     margin: "0",
     fontFamily: "Montserrat, sans-serif",
@@ -24,35 +54,35 @@ export default function MediaCard(props) {
     color: "#fff",
     textDecoration: "none"
   }
-  const CardMediaStyle = props.mutants ? {
-    height: 190, backgroundSize: "50%"
-  } : {
-    height: 190, backgroundSize: "50%"
+  const CardMediaStyle = {
+    height: 190,
+    backgroundSize: "50%"
   }
+
   return (
     <Card sx={{ backgroundImage: "none", border: "1px solid #bfc500", backgroundColor: "transparent" }} className={classes[defaultClass]}>
       <CardMedia
         sx={CardMediaStyle}
-        image={props.mutants ? mutantLogo : logo}
-        title={props.mutants ? "DSDC Mutants Staking" : "DSDC Staking"}
+        image={logo}
+        title={title}
       />
       <CardContent sx={{ textAlign: "center", padding: "14px" }}>
         <Typography sx={{ whiteSpace: "nowrap" }} gutterBottom variant="h5" component="div">
-          {props.mutants ? "Mutants Staking" : "DSDC Staking"}
+          {title}
         </Typography>
         {props.mutants ? <>
           <Typography variant="body2" color="text.secondary">
-            ◘ 10x Higher APR
+            {descriptionOne}
           </Typography>
           <Typography variant="body2" color="text.secondary">
-            ◘ 1 month lock
+            No Lock
           </Typography></> :
           <>
             <Typography variant="body2" color="text.secondary">
-              ◘ Can unstake anytime
+            {descriptionOne}
             </Typography>
             <Typography variant="body2" color="text.secondary">
-              ◘ Lower APR
+            No Lock
             </Typography>
           </>}
       </CardContent>
