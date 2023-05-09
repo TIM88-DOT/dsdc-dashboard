@@ -26,11 +26,15 @@ export default function TotalRewards(props) {
       if (Number(totalRewardsValue) > 0) {
         try {
           setLoading(true);
-          await mutantsStakingContract.claimEarnedReward(plan);
+          const tx = await mutantsStakingContract.claimEarnedReward(plan);
+          await tx.wait();
           setLoading(false);
+
         } catch (error) {
           console.log(error);
         }
+        setLoading(false);
+
       }
     }
   };
