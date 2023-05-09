@@ -23,7 +23,7 @@ export default function TotalRewards(props) {
         abis.staking,
         signer
       );
-      if (Number(totalRewardsValue[0]) > 0) {
+      if (Number(totalRewardsValue) > 0) {
         try {
           setLoading(true);
           await mutantsStakingContract.claimEarnedReward(plan);
@@ -49,7 +49,7 @@ export default function TotalRewards(props) {
 
           <Typography variant="h6" component="h6" sx={{ color: "#7b9c13" }}>
             {totalRewardsValue &&
-              ethers.utils.formatEther(totalRewardsValue[0])}
+              ethers.utils.formatEther(totalRewardsValue)}
           </Typography>
         </div>
       ) : (

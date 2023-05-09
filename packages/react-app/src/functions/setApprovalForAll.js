@@ -18,8 +18,8 @@ const setApprovalForAll = async (plan) => {
             contractAbi = abis.mutants
             break;
           case 2:
-            contractAddress = addresses.mutants
-            contractAbi = abis.mutants
+            contractAddress = addresses.stoned
+            contractAbi = abis.stoned
             break
           default:
             break;
