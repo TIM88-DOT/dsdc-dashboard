@@ -54,8 +54,6 @@ export default function StakedNfts(props) {
   const walletOfOwnerValue = useGetUserNFTs(props.plan);
 
   const { isLoading, stakedNftsValue } = useGetStakedNFTs(props.plan);
-  console.log("users staked nfts", stakedNftsValue);
-  console.log("isLoading", isLoading);
 
   useEffect(() => {
   }, [selectedUnstakeNFT]);

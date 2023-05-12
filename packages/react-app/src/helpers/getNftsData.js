@@ -6,13 +6,13 @@ async function getNftsData(plan, userNfts ) {
     let metadataUri;
     switch (plan) {
       case 0:
-        metadataUri = 'https://bafybeigmbv6qevyposswcncodvket6bl34chc4j6326akxg2xj6arkmfwu.ipfs.nftstorage.link/'
+        metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmPa2HvB6zV6MWhoJEB49EA4qLvgGoJ4GUwAUDcXZpzsYF/'
         break;
       case 1:
         metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmadV6pf2fzgmo3NDbx5fuyxNZUcTaNiGSKbNx3FoWkgAG/'
         break;
       case 2:
-        metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmadV6pf2fzgmo3NDbx5fuyxNZUcTaNiGSKbNx3FoWkgAG/'
+        metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmXaQyb4yozkyf3znunYNRRDReooxSnzfgLgokM5jKKrdJ/'
         break
       default:
         break;

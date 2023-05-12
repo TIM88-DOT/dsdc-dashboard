@@ -26,7 +26,7 @@ const useGetUserNFTs = (plan) => {
   const { data, isError, isLoading } = useContractRead({
     address: contractAddress,
     abi: contractAbi,
-    functionName: 'walletOfOwner',
+    functionName: plan === 1 ? 'tokensOfOwner' : 'walletOfOwner',
     args: [address],
     watch: true
   })
