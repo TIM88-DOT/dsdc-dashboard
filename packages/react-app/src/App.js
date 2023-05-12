@@ -6,7 +6,6 @@ import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
 import { bscTestnet } from 'wagmi/chains'
 
-import StickyFooter from './components/StickyFooter'
 
 function App() {
   const chains = [bscTestnet]
