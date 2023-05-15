@@ -1,38 +1,21 @@
-import { useState, useEffect } from "react";
-import { ethers } from "ethers";
 import { addresses, abis } from "@uniswap-v2-app/contracts";
-import { useAccount } from "wagmi";
-import useGetStakedNFTs from "./useGetStakedNFTs";
+import { useContractRead, useAccount } from 'wagmi'
 
 const useGetTotalRewards = (plan) => {
-  const [totalRewards, setTotalRewards] = useState();
   const { address } = useAccount();
-  const stakedNftsValue = useGetStakedNFTs(plan);
-  useEffect(() => {
-    const getTotalRewards = async () => {
-      try {
-        const provider = new ethers.providers.JsonRpcProvider(
-          "https://bsc-dataseed3.binance.org/"
-        );
-        const contract = new ethers.Contract(
-          addresses.staking,
-          abis.staking,
-          provider
-        );
-        const totalRewardsValue = await contract.getEarnedRewards(
-          plan,
-          address
-        );
-        setTotalRewards(totalRewardsValue);
-      } catch (error) {
-        console.error(error);
-      }
-    };
 
-    getTotalRewards();
-  }, [address, plan, totalRewards, stakedNftsValue]);
-
-  return totalRewards;
+  const { data, isError, isLoading } = useContractRead({
+    address: addresses.staking,
+    abi: abis.stink,
+    functionName: 'getEarnedRewards',
+    args: [plan, address],
+    watch: true
+  })
+  if (isError) {
+    console.error("error getting earned rewards");
+    return undefined;
+  }
+  return data;
 };
 
 export default useGetTotalRewards;
