@@ -12,7 +12,7 @@ const useGetTotalRewards = (plan) => {
     const getTotalRewards = async () => {
       try {
         const provider = new ethers.providers.JsonRpcProvider(
-          "https://data-seed-prebsc-1-s2.binance.org:8545"
+          "https://bsc-dataseed3.binance.org/"
         );
         const contract = new ethers.Contract(
           addresses.staking,

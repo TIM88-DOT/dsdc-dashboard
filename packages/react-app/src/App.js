@@ -4,11 +4,11 @@ import Dashboard from "./components/Dashboard";
 import { EthereumClient, w3mConnectors, w3mProvider } from '@web3modal/ethereum'
 import { Web3Modal } from '@web3modal/react'
 import { configureChains, createClient, WagmiConfig } from 'wagmi'
-import { bscTestnet } from 'wagmi/chains'
+import { bsc } from 'wagmi/chains'
 
 
 function App() {
-  const chains = [bscTestnet]
+  const chains = [bsc]
   const projectId = '55ce67f74172a4fdea4813ac99488323'
 
   const { provider } = configureChains(chains, [w3mProvider({ projectId })])
