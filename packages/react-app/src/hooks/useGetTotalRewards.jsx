@@ -6,7 +6,7 @@ const useGetTotalRewards = (plan) => {
 
   const { data, isError, isLoading } = useContractRead({
     address: addresses.staking,
-    abi: abis.stink,
+    abi: abis.staking,
     functionName: 'getEarnedRewards',
     args: [plan, address],
     watch: true
