@@ -4,7 +4,7 @@ import { useContractRead, useAccount } from 'wagmi'
 const useGetTotalRewards = (plan) => {
   const { address } = useAccount();
 
-  const { data, isError, isLoading } = useContractRead({
+  const { data, isError, error } = useContractRead({
     address: addresses.staking,
     abi: abis.staking,
     functionName: 'getEarnedRewards',
@@ -12,7 +12,7 @@ const useGetTotalRewards = (plan) => {
     watch: true
   })
   if (isError) {
-    console.error("error getting earned rewards");
+    console.error("error getting earned rewards:", error);
     return undefined;
   }
   return data;

@@ -10,7 +10,7 @@ const useGetStakedNFTs = (plan) => {
   const [isLoading, setIsLoading] = useState(false);
   const { address } = useAccount();
 
-  const { data, isError } = useContractRead({
+  const { data, isError, error } = useContractRead({
     address: addresses.staking,
     abi: abis.staking,
     functionName: 'getStakedTokens',
@@ -18,7 +18,7 @@ const useGetStakedNFTs = (plan) => {
     watch: true
   })
   if (isError) {
-    console.error("error getting isApprovedForAll");
+    console.error("error getting Staked Tokens", error);
   }
 
   const getData = useCallback(async () => {

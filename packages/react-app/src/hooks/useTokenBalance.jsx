@@ -5,7 +5,7 @@ export function useTokenBalance(
 
   const { address } = useAccount();
 
-  const { data, isError, isLoading } = useContractRead({
+  const { data, isError, error } = useContractRead({
     address: addresses.stink,
     abi: abis.stink,
     functionName: 'balanceOf',
@@ -13,7 +13,7 @@ export function useTokenBalance(
     watch: true
   })
   if (isError) {
-    console.error("error getting token balance");
+    console.error("error getting token balance", error);
     return undefined;
   }
 

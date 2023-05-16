@@ -24,7 +24,7 @@ export function useGetIsApprovedForAll(
       break;
   }
 
-  const { data, isError, isLoading } = useContractRead({
+  const { data, isError, error } = useContractRead({
     address: contractAddress,
     abi: contractAbi,
     functionName: 'isApprovedForAll',
@@ -32,7 +32,7 @@ export function useGetIsApprovedForAll(
     watch: true
   })
   if (isError) {
-    console.error("error getting isApprovedForAll");
+    console.error("error getting isApprovedForAll", error);
     return undefined;
   }
 
