@@ -22,7 +22,7 @@ export const mainListItems = (
   <React.Fragment>
 
     <Link style={linkStyle} to={`/`}>
-      <ListItemButton sx={{ paddingLeft: "4px" }}>
+      <ListItemButton>
         <ListItemIcon>
           <SwapVertIcon />
         </ListItemIcon>
@@ -31,7 +31,7 @@ export const mainListItems = (
     </Link>
 
     <Link style={linkStyle} to={`stake`}>
-      <ListItemButton sx={{ paddingLeft: "4px" }}>
+      <ListItemButton>
         <ListItemIcon>
           <RocketLaunchIcon />
         </ListItemIcon>
@@ -39,7 +39,7 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <ListItemButton sx={{ paddingLeft: "4px" }}>
+    <ListItemButton>
       <ListItemIcon>
         <MonetizationOnIcon />
       </ListItemIcon>
@@ -47,7 +47,7 @@ export const mainListItems = (
     </ListItemButton>
 
     <Link style={linkStyle} to={`stake`}>
-      <ListItemButton sx={{ paddingLeft: "4px" }} to={`chart`}>
+      <ListItemButton to={`chart`}>
         <ListItemIcon>
           <ShowChartIcon />
         </ListItemIcon>
@@ -64,7 +64,7 @@ export const secondaryListItems = (
       SOCIALS
     </ListSubheader>
     <a style={linkStyle} href="https://t.me/DrunkSkunksDCOfficial" target="_blank" rel="noopener noreferrer">
-      <ListItemButton sx={{ paddingLeft: "4px" }}>
+      <ListItemButton>
         <ListItemIcon>
           <TelegramIcon />
         </ListItemIcon>
@@ -72,7 +72,7 @@ export const secondaryListItems = (
       </ListItemButton>
     </a>
     <a style={linkStyle} href="https://twitter.com/DrunkSkunksDC" target="_blank" rel="noopener noreferrer">
-      <ListItemButton sx={{ paddingLeft: "4px" }}>
+      <ListItemButton>
         <ListItemIcon>
           <TwitterIcon />
         </ListItemIcon>
@@ -80,7 +80,7 @@ export const secondaryListItems = (
       </ListItemButton>
     </a>
     <a style={linkStyle} href="https://drunkskunksdc.com/" target="_blank" rel="noopener noreferrer">
-      <ListItemButton sx={{ paddingLeft: "4px" }}>
+      <ListItemButton>
         <ListItemIcon>
           <PublicIcon />
         </ListItemIcon>
@@ -88,7 +88,7 @@ export const secondaryListItems = (
       </ListItemButton>
     </a>
     <a style={linkStyle} href="https://docs.drunkskunksdc.com/" target="_blank" rel="noopener noreferrer">
-      <ListItemButton sx={{ paddingLeft: "4px" }}>
+      <ListItemButton>
         <ListItemIcon>
           <DescriptionIcon />
         </ListItemIcon>

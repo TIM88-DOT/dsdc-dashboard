@@ -72,6 +72,10 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
   }),
 );
 
+const theme = createTheme({
+
+});
+
 const mdTheme = createTheme({
   palette: {
     mode: 'dark',
@@ -88,6 +92,19 @@ const mdTheme = createTheme({
   typography: {
     fontFamily: "Montserrat, sans-serif",
     fontSize: 12, // Set the font size to 10
+  },
+  
+  components: {
+    // Name of the component
+    ListItemIcon: {
+      styleOverrides: {
+        // Name of the slot
+        root: {
+          // Some CSS
+          padding: '8px 4px',
+        },
+      },
+    },
   },
   spacing: (factor) => `${0.25 * factor}rem`,
 });
