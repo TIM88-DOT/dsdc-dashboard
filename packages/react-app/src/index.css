@@ -9,7 +9,7 @@ code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }
 
-.MuiButtonBase-root {
+.MuiListItemButton-root {
   border-radius: 12px !important;
   padding-left: 4px !important;
 }
