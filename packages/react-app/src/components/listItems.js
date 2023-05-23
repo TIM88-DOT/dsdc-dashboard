@@ -46,8 +46,8 @@ export const mainListItems = (
       <ListItemText primary="TOKEN STAKING" />
     </ListItemButton>
 
-    <Link style={linkStyle} to={`stake`}>
-      <ListItemButton to={`chart`}>
+    <Link style={linkStyle} to={`chart`}>
+      <ListItemButton>
         <ListItemIcon>
           <ShowChartIcon />
         </ListItemIcon>
