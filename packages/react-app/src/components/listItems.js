@@ -39,12 +39,12 @@ export const mainListItems = (
       </ListItemButton>
     </Link>
 
-    <ListItemButton>
+    {/* <ListItemButton>
       <ListItemIcon>
         <MonetizationOnIcon />
       </ListItemIcon>
       <ListItemText primary="TOKEN STAKING" />
-    </ListItemButton>
+    </ListItemButton> */}
 
     <Link style={linkStyle} to={`chart`}>
       <ListItemButton>

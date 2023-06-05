@@ -1,18 +1,20 @@
 import axios from "axios";
+import { getIpfsUrls } from "./getIpfsUrls";
 
 
 async function getNftsData(plan, userNfts ) {
     const tokenData = [];
+    const ipfsUrls = await getIpfsUrls();
     let metadataUri;
     switch (plan) {
       case 0:
-        metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmPa2HvB6zV6MWhoJEB49EA4qLvgGoJ4GUwAUDcXZpzsYF/'
+        metadataUri = ipfsUrls.ogDsdc;
         break;
       case 1:
-        metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmadV6pf2fzgmo3NDbx5fuyxNZUcTaNiGSKbNx3FoWkgAG/'
+        metadataUri = ipfsUrls.mutants;
         break;
       case 2:
-        metadataUri = 'https://drunkskunksdc.mypinata.cloud/ipfs/QmXaQyb4yozkyf3znunYNRRDReooxSnzfgLgokM5jKKrdJ/'
+        metadataUri = ipfsUrls.ssss;
         break
       default:
         break;
