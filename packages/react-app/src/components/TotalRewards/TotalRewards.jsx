@@ -12,6 +12,7 @@ export default function TotalRewards(props) {
   const { data: signer } = useSigner();
   const { address } = useAccount();
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
   const plan = props.plan;
   const totalRewardsValue = useGetTotalRewards(plan);
   //console.log("totalRewards", totalRewardsValue);
@@ -30,8 +31,11 @@ export default function TotalRewards(props) {
           await tx.wait();
           setLoading(false);
 
+
         } catch (error) {
           console.log(error);
+          setError(error.error?.data?.message);
+
         }
         setLoading(false);
 
@@ -69,6 +73,9 @@ export default function TotalRewards(props) {
           )}
         </ButtonPrimary>
       </div>
+      {
+        error && <p sx={{ textAlign: "center" }}>{error}</p>
+      }
     </div>
   );
 }

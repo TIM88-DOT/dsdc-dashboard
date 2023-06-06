@@ -31,6 +31,7 @@ export default function StakedNfts(props) {
   const [stakeLoading, setStakeLoading] = useState(false);
   const [unstakeLoading, setUnstakeLoading] = useState(false);
   const [confirmLoading, setConfirmLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const title = getTitle(props.plan);
 
@@ -99,6 +100,7 @@ export default function StakedNfts(props) {
         await tx.wait()
       } catch (error) {
         console.log(error);
+        setError(error)
       }
     }
   };
@@ -120,6 +122,7 @@ export default function StakedNfts(props) {
       } catch (error) {
         console.log(error);
         setUnstakeLoading(false);
+        setError(error.error?.data?.message);
       }
     }
   };
@@ -175,6 +178,9 @@ export default function StakedNfts(props) {
         </ButtonSecondary>
       </div>
 
+      {
+        error && <p sx={{ textAlign: "center" }}>{error}</p>
+      }
       <Modal
         open={open}
         onClose={handleClose}
