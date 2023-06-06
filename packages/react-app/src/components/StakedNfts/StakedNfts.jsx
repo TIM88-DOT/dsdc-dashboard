@@ -100,7 +100,7 @@ export default function StakedNfts(props) {
         await tx.wait()
       } catch (error) {
         console.log(error);
-        setError(error)
+        setError(error.error?.data?.message)
       }
     }
   };
