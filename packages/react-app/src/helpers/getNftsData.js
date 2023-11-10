@@ -24,7 +24,7 @@ async function getNftsData(plan, userNfts ) {
         metadataUri + userNfts[j] + '.json'
       );
       const nftTokenData = {
-        img: `https://drunkskunksdc.mypinata.cloud/ipfs/${metadata.data.image.slice(
+        img: `https://ipfs.io/ipfs/${metadata.data.image.slice(
           7
         )}`,
         title: plan === 1 ? `DSDC Mutant #${userNfts[j]}` : metadata.data.name,
