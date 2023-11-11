@@ -63,7 +63,7 @@ export const secondaryListItems = (
     <ListSubheader sx={{ backgroundColor: "#020202" }} component="div" inset>
       SOCIALS
     </ListSubheader>
-    <a style={linkStyle} href="https://t.me/DrunkSkunksDCOfficial" target="_blank" rel="noopener noreferrer">
+    <a style={linkStyle} href="https://t.me/drunkskunksdrinkingclub" target="_blank" rel="noopener noreferrer">
       <ListItemButton>
         <ListItemIcon>
           <TelegramIcon />
